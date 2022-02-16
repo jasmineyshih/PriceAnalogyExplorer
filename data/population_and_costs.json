@@ -1,0 +1,139 @@
+{
+    "population": [
+        {
+            "population": 488,
+            "population_text": "All Stanford Medical Students"
+        },
+        {
+            "population": 592,
+            "population_text": "All Stanford Law Students"
+        },
+        {
+            "population": 952,
+            "population_text": "All Stanford GSB Students"
+        },
+        {
+            "population": 1661,
+            "population_text": "All Stanford Female Engineering Students"
+        },
+        {
+            "population": 2831,
+            "population_text": "All Stanford Male Engineering Students"
+        },
+        {
+            "population": 4492,
+            "population_text": "All Stanford Engineering Students"
+        },
+        {
+            "population": 6366,
+            "population_text": "All Stanford Undergrad Students"
+        },
+        {
+            "population": 7374,
+            "population_text": "All Stanford Grad Students"
+        },
+        {
+            "population": 15157,
+            "population_text": "All Stanford Students"
+        },
+        {
+            "population": 34138,
+            "population_text": "The City of Menlo Park"
+        },
+        {
+            "population": 68572,
+            "population_text": "The City of Palo Alto"
+        },
+        {
+            "population": 85784,
+            "population_text": "Redwood City"
+        },
+        {
+            "population": 152770,
+            "population_text": "The City of Sunnyvale"
+        },
+        {
+            "population": 764442,
+            "population_text": "The County of San Mateo"
+        },
+        {
+            "population": 1936259,
+            "population_text": "The County of Santa Clara"
+        },
+        {
+            "population": 9710000,
+            "population_text": "The Entire Bay Area"
+        },
+        {
+            "population": 39538223,
+            "population_text": "The State of California"
+        }
+    ],
+    "onetime": [
+        {
+            "type": "tuition",
+            "name": "Stanford Law School Tuition covered",
+            "cost": 193050
+        },
+        {
+            "type": "tuition",
+            "name": "Stanford Med School Tuition covered",
+            "cost": 254988
+        },
+        {
+            "type": "tuition",
+            "name": "Stanford MBA Tuition covered",
+            "cost": 149412
+        },
+        {
+            "type": "tuition",
+            "name": "Stanford Masters in Engineering Tuition covered",
+            "cost": 75240
+        },
+        {
+            "type": "tuition",
+            "name": "Stanford Undergrad Tuition covered",
+            "cost": 221892
+        },
+        {
+            "type": "transportation",
+            "name": "a Toyota Corolla",
+            "cost": 22000
+        },
+        {
+            "type": "transportation",
+            "name": "a Toyota Prius",
+            "cost": 34607
+        },
+        {
+            "type": "transportation",
+            "name": "a Tesla Model 3",
+            "cost": 44990
+        },
+        {
+            "type": "transportation",
+            "name": "an Average Road Bike",
+            "cost": 400
+        },
+        {
+            "type": "transportation",
+            "name": "an Average Boat",
+            "cost": 60000
+        },
+        {
+            "type": "entertainment",
+            "name": "a Superbowl Ticket",
+            "cost": 9496
+        },
+        {
+            "type": "entertainment",
+            "name": "their wedding paid for in California",
+            "cost": 25000
+        },
+        {
+            "type": "entertainment",
+            "name": "a Family Vacation To Hawaii",
+            "cost": 4371
+        }
+    ]
+}
