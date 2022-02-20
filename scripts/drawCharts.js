@@ -81,7 +81,6 @@ function drawChartWithTimeComponent (dataset) {
             costLineArray.push({x: xVal, y: m});
         }
     });
-    console.log(costLineArray)
     timeCompSvg.append("path")
         .attr("fill", "none")
         .attr("stroke", monthlyCostLineColor)
@@ -133,7 +132,7 @@ function drawOrUpdateOneTimeDots() {
                     .attr("id", d => `o${d.id}`);
             },
             update => {
-                return update.attr("cy", function (d) { console.log("here");return yOnetime(amount); });
+                return update.attr("cy", function (d) { return yOnetime(amount); });
             },
             exit => {
                 return exit.remove();
@@ -163,7 +162,6 @@ function updateMonthlyCost() {
             costLineArray.push({x: xVal, y: m});
         }
     });
-    console.log(costLineArray);
     timeCompSvg.select("#costCurve")
         .attr("d", lineFunct(costLineArray, x, y, "x", "y"));
     updateDots();
@@ -194,6 +192,7 @@ function drawOnetimeCostLine(obj) {
     }
     oneTimeSvg.datum(obj)
         .append("path")
+        .attr("class", `${obj.type}CostLine`)
         .attr("fill", "none")
         .attr("stroke", colorMap[obj.type])
         .attr("stroke-width", 1.25)
@@ -279,7 +278,6 @@ function drawOneTimeCostChart () {
         }
         onetimeDotsArray.push(entry);
     });
-    console.log(onetimeDotsArray);
     oneTimeSvg.append("g").classed("gridDotsGroup", true);
     drawOrUpdateOneTimeDots();
     findClosestOnetimeAnalogy();
@@ -349,17 +347,30 @@ function findClosestAnalogy () {
     currAnalogyDot = d3.select(`#c${closestMultDot.time}c${closestMultDot.id}`).style('opacity', 0.8);
 }
 
+function updateShownCategories (categoryName) {
+    if (d3.select(`#${categoryName}Checkbox`).property("checked")) {    // including
+        excludedCategories.delete(categoryName);
+        d3.selectAll(`.${categoryName}CostLine`).style("display", "block");
+    } else {    // excluding
+        excludedCategories.add(categoryName);
+        d3.selectAll(`.${categoryName}CostLine`).style("display", "none");
+    }
+    findClosestOnetimeAnalogy();
+}
+
 function findClosestOnetimeAnalogy () {
     let smallestMultDiff = Infinity;
     let closestMultDot = null;
     let type = null;
     onetimeDotsArray.forEach(dot => {
         onetimeData.forEach(d => {
-            let multDiff = Math.abs(dot.freePrize - d.cost);
-            if (multDiff < smallestMultDiff) {
-                smallestMultDiff = multDiff;
-                closestMultDot = dot;
-                type = d;
+            if (!excludedCategories.has(d.type)) {
+                let multDiff = Math.abs(dot.freePrize - d.cost);
+                if (multDiff < smallestMultDiff) {
+                    smallestMultDiff = multDiff;
+                    closestMultDot = dot;
+                    type = d;
+                }
             }
         })
     });

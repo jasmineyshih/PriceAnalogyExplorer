@@ -146,6 +146,10 @@
                         </div>
                     </div>
                 </div>
+                <div id="categoryFiltersSection">
+                    <div>Show Categories:</div>
+                    <div id="categoryFiltersContainer"></div>
+                </div>
             </div>
         </div>
         
@@ -161,7 +165,8 @@
         let maxOnetimeAmount = 1000000000000;
         let dotsArray = [];
         let monthArray = [];
-        let onetimeDotsArray
+        let onetimeDotsArray;
+        let excludedCategories = new Set();
         let monthToStringMap = {};
         let colors = d3.schemeTableau10;
         let colorMap = {};
@@ -223,11 +228,25 @@
             let currColorIndex = 0;
             let maxCost = d3.max(onetimeData.map(dat => dat.cost));
             onetimeData.forEach(d => {
-                console.log(d.type)
                 if (!colorMap[d.type]) {
                     colorMap[d.type] = colors[currColorIndex];
                     currColorIndex++;
                 }
+            });
+            Object.keys(colorMap).forEach(cateName => {
+                let checkboxDiv = d3.select("#categoryFiltersContainer")
+                    .append("div")
+                    .classed("categoryCheckboxContainer", true);
+                checkboxDiv.append("input")
+                    .attr("type", "checkbox")
+                    .attr("id", `${cateName}Checkbox`)
+                    .attr("name", `${cateName}Checkbox`)
+                    .property("checked", true)
+                    .on("change", () => { updateShownCategories(cateName) });
+                checkboxDiv.append("label")
+                    .attr("for", `${cateName}Checkbox`)
+                    .attr("id", `${cateName}CheckboxLabel`)
+                    .html(cateName);
             });
             drawOneTimeCostChart();
 

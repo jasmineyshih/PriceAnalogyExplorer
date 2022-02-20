@@ -134,6 +134,16 @@
             "type": "entertainment",
             "name": "a Family Vacation To Hawaii",
             "cost": 4371
+        },
+        {
+            "type": "food",
+            "name": "a Cup of Coffee",
+            "cost": 2.7
+        },
+        {
+            "type": "food",
+            "name": "a McChicken",
+            "cost": 1.29
         }
     ]
 }
