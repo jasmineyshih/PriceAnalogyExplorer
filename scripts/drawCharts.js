@@ -391,12 +391,14 @@ function switchAnalogyType () {
         hideOrDisplayById("viz", false);
         hideOrDisplayById("analogySentence", false);
         hideOrDisplayById("analogySentenceOnetime");
+        hideOrDisplayById("categoryFiltersSection");
         hideOrDisplayById("oneTimeCostViz");
     } else {
         hideOrShowById("monthlyCostInput");
         hideOrDisplayById("viz");
         hideOrDisplayById("analogySentence");
         hideOrDisplayById("analogySentenceOnetime", false);
+        hideOrDisplayById("categoryFiltersSection", false);
         hideOrDisplayById("oneTimeCostViz", false);
     }
 }

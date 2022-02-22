@@ -112,6 +112,11 @@
         },
         {
             "type": "transportation",
+            "name": "a gallon of gas",
+            "cost": 4.78
+        },
+        {
+            "type": "transportation",
             "name": "an Average Road Bike",
             "cost": 400
         },
@@ -127,13 +132,28 @@
         },
         {
             "type": "entertainment",
-            "name": "their wedding paid for in California",
+            "name": "an average wedding in California",
             "cost": 25000
+        },
+        {
+            "type": "entertainment",
+            "name": "a 1-day 1-park ticket for Disneyland (tier 1)",
+            "cost": 104
+        },
+        {
+            "type": "entertainment",
+            "name": "a movie ticket",
+            "cost": 9.37
         },
         {
             "type": "entertainment",
             "name": "a Family Vacation To Hawaii",
             "cost": 4371
+        },
+        {
+            "type": "entertainment",
+            "name": "a month of gym membership",
+            "cost": 142
         },
         {
             "type": "food",
@@ -144,6 +164,11 @@
             "type": "food",
             "name": "a McChicken",
             "cost": 1.29
+        },
+        {
+            "type": "food",
+            "name": "a gallon of milk",
+            "cost": 3.77
         }
     ]
 }
