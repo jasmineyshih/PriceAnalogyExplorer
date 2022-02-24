@@ -362,11 +362,15 @@ function findClosestOnetimeAnalogy () {
     let smallestMultDiff = Infinity;
     let closestMultDot = null;
     let type = null;
+    console.log(excludedCategories);
+    console.log(onetimeDotsArray);
     onetimeDotsArray.forEach(dot => {
         onetimeData.forEach(d => {
             if (!excludedCategories.has(d.type)) {
-                let multDiff = Math.abs(dot.freePrize - d.cost);
+                let multDiff = Math.abs(dot.freePrize - d.cost) / dot.freePrize;
                 if (multDiff < smallestMultDiff) {
+                    console.log(dot);
+                    console.log(dot.freePrize, d.cost);
                     smallestMultDiff = multDiff;
                     closestMultDot = dot;
                     type = d;
@@ -374,6 +378,7 @@ function findClosestOnetimeAnalogy () {
             }
         })
     });
+    console.log(closestMultDot);
     d3.select("#analogyAmountOnetime").html(amount.toLocaleString());
     d3.select("#analogyPopOnetime").html(closestMultDot.population_text);
     d3.select("#analogyCostType").html(`${type.name} ($${type.cost.toLocaleString()})`);
