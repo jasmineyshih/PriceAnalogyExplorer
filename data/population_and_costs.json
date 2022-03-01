@@ -1,64 +1,361 @@
 {
     "population": [
         {
+            "school": "medicine",
+            "level": "grad",
+            "gender": "all",
+            "population": 1262,
+            "population_text": "All Students in School of Medicine"
+        },
+        {
+            "school": "medicine",
+            "level": "grad",
+            "gender": "male",
+            "population": 590,
+            "population_text": "All Male Students in School of Medicine"
+        },
+        {
+            "school": "medicine",
+            "level": "grad",
+            "gender": "female",
+            "population": 672,
+            "population_text": "All Female Students in School of Medicine"
+        },{
+            "school": "medicine",
+            "sub": "med",
+            "level": "grad",
+            "gender": "all",
             "population": 488,
-            "population_text": "All Stanford Medical Students"
+            "population_text": "All MD Students in School of Medicine"
         },
         {
+            "school": "medicine",
+            "sub": "med",
+            "level": "grad",
+            "gender": "male",
+            "population": 248,
+            "population_text": "All Male MD Students"
+        },
+        {
+            "school": "medicine",
+            "sub": "med",
+            "level": "grad",
+            "gender": "female",
+            "population": 240,
+            "population_text": "All Female MD Students"
+        },
+        {
+            "school": "law",
+            "level": "grad",
+            "gender": "all",
             "population": 592,
-            "population_text": "All Stanford Law Students"
+            "population_text": "All Students in School of Law"
         },
         {
+            "school": "law",
+            "level": "grad",
+            "gender": "male",
+            "population": 305,
+            "population_text": "All Male Students in School of Law"
+        },
+        {
+            "school": "law",
+            "level": "grad",
+            "gender": "female",
+            "population": 287,
+            "population_text": "All Female Students in School of Law"
+        },
+        {
+            "school": "gsb",
+            "level": "grad",
+            "gender": "all",
             "population": 952,
-            "population_text": "All Stanford GSB Students"
+            "population_text": "All Students in Graduate School of Business"
         },
         {
-            "population": 1661,
-            "population_text": "All Stanford Female Engineering Students"
+            "school": "gsb",
+            "level": "grad",
+            "gender": "male",
+            "population": 509,
+            "population_text": "All Male Students in Graduate School of Business"
         },
         {
-            "population": 2831,
-            "population_text": "All Stanford Male Engineering Students"
+            "school": "gsb",
+            "level": "grad",
+            "gender": "female",
+            "population": 443,
+            "population_text": "All Female Students in Graduate School of Business"
         },
         {
+            "school": "education",
+            "level": "grad",
+            "gender": "all",
+            "population": 277,
+            "population_text": "All Students in School of Education"
+        },
+        {
+            "school": "education",
+            "level": "grad",
+            "gender": "male",
+            "population": 99,
+            "population_text": "All Male Students in School of Education"
+        },
+        {
+            "school": "education",
+            "level": "grad",
+            "gender": "female",
+            "population": 178,
+            "population_text": "All Female Students in School of Education"
+        },
+        {
+            "school": "engineering",
+            "level": "all",
+            "gender": "all",
             "population": 4492,
-            "population_text": "All Stanford Engineering Students"
+            "population_text": "All Students in School of Engineering"
         },
         {
+            "school": "engineering",
+            "level": "all",
+            "gender": "male",
+            "population": 2831,
+            "population_text": "All Male Students in School of Engineering"
+        },
+        {
+            "school": "engineering",
+            "level": "all",
+            "gender": "female",
+            "population": 1661,
+            "population_text": "All Female Students in School of Engineering"
+        },
+        {
+            "school": "engineering",
+            "level": "grad",
+            "gender": "all",
+            "population": 3214,
+            "population_text": "All Grad Students in School of Engineering"
+        },
+        {
+            "school": "engineering",
+            "level": "grad",
+            "gender": "male",
+            "population": 2086,
+            "population_text": "All Male Grad Students in School of Engineering"
+        },
+        {
+            "school": "engineering",
+            "level": "grad",
+            "gender": "female",
+            "population": 1128,
+            "population_text": "All Female Grad Students in School of Engineering"
+        },
+        {
+            "school": "engineering",
+            "level": "undergrad",
+            "gender": "all",
+            "population": 1278,
+            "population_text": "All Undergrad Students in School of Engineering"
+        },
+        {
+            "school": "engineering",
+            "level": "undergrad",
+            "gender": "male",
+            "population": 533,
+            "population_text": "All Male Undergrad Students in School of Engineering"
+        },
+        {
+            "school": "engineering",
+            "level": "undergrad",
+            "gender": "female",
+            "population": 745,
+            "population_text": "All Female Undergrad Students in School of Engineering"
+        },
+        {
+            "school": "earth",
+            "level": "all",
+            "gender": "all",
+            "population": 508,
+            "population_text": "All Students in School of EEES"
+        },
+        {
+            "school": "earth",
+            "level": "all",
+            "gender": "male",
+            "population": 237,
+            "population_text": "All Male Students in School of EEES"
+        },
+        {
+            "school": "earth",
+            "level": "all",
+            "gender": "female",
+            "population": 271,
+            "population_text": "All Female Students in School of EEES"
+        },
+        {
+            "school": "earth",
+            "level": "grad",
+            "gender": "all",
+            "population": 415,
+            "population_text": "All Grad Students in School of EEES"
+        },
+        {
+            "school": "earth",
+            "level": "grad",
+            "gender": "male",
+            "population": 206,
+            "population_text": "All Male Grad Students in School of EEES"
+        },
+        {
+            "school": "earth",
+            "level": "grad",
+            "gender": "female",
+            "population": 206,
+            "population_text": "All Female Grad Students in School of EEES"
+        },
+        {
+            "school": "earth",
+            "level": "undergrad",
+            "gender": "all",
+            "population": 93,
+            "population_text": "All Undergrad Students in School of EEES"
+        },
+        {
+            "school": "earth",
+            "level": "undergrad",
+            "gender": "male",
+            "population": 31,
+            "population_text": "All Male Undergrad Students in School of EEES"
+        },
+        {
+            "school": "earth",
+            "level": "undergrad",
+            "gender": "female",
+            "population": 62,
+            "population_text": "All Female Undergrad Students in School of EEES"
+        },
+        {
+            "school": "humanities&sciences",
+            "level": "all",
+            "gender": "all",
+            "population": 4175,
+            "population_text": "All Students in School of Humanities & Sciences"
+        },
+        {
+            "school": "humanities&sciences",
+            "level": "all",
+            "gender": "male",
+            "population": 2105,
+            "population_text": "All Male Students in School of Humanities & Sciences"
+        },
+        {
+            "school": "humanities&sciences",
+            "level": "all",
+            "gender": "female",
+            "population": 2070,
+            "population_text": "All Female Students in School of Humanities & Sciences"
+        },
+        {
+            "school": "humanities&sciences",
+            "level": "grad",
+            "gender": "all",
+            "population": 2307,
+            "population_text": "All Grad Students in School of Humanities & Sciences"
+        },
+        {
+            "school": "humanities&sciences",
+            "level": "grad",
+            "gender": "male",
+            "population": 1297,
+            "population_text": "All Male Grad Students in School of Humanities & Sciences"
+        },
+        {
+            "school": "humanities&sciences",
+            "level": "grad",
+            "gender": "female",
+            "population": 1010,
+            "population_text": "All Female Grad Students in School of Humanities & Sciences"
+        },
+        {
+            "school": "humanities&sciences",
+            "level": "undergrad",
+            "gender": "all",
+            "population": 1868,
+            "population_text": "All Undergrad Students in School of Humanities & Sciences"
+        },
+        {
+            "school": "humanities&sciences",
+            "level": "undergrad",
+            "gender": "male",
+            "population": 808,
+            "population_text": "All Male Undergrad Students in School of Humanities & Sciences"
+        },
+        {
+            "school": "humanities&sciences",
+            "level": "undergrad",
+            "gender": "female",
+            "population": 1060,
+            "population_text": "All Female Undergrad Students in School of Humanities & Sciences"
+        },
+        {
+            "school": "all",
+            "level": "undergrad",
+            "gender": "all",
             "population": 6366,
             "population_text": "All Stanford Undergrad Students"
         },
         {
+            "school": "all",
+            "level": "undergrad",
+            "gender": "male",
+            "population": 3124,
+            "population_text": "All Stanford Male Undergrad Students"
+        },
+        {
+            "school": "all",
+            "level": "undergrad",
+            "gender": "female",
+            "population": 3242,
+            "population_text": "All Stanford Female Undergrad Students"
+        },
+        {
+            "school": "all",
+            "level": "grad",
+            "gender": "all",
             "population": 7374,
             "population_text": "All Stanford Grad Students"
         },
         {
-            "population": 15157,
-            "population_text": "All Stanford Students"
+            "school": "all",
+            "level": "grad",
+            "gender": "male",
+            "population": 4107,
+            "population_text": "All Stanford Male Grad Students"
         },
         {
-            "population": 34138,
-            "population_text": "The City of Menlo Park"
+            "school": "all",
+            "level": "grad",
+            "gender": "female",
+            "population": 4107,
+            "population_text": "All Stanford Female Grad Students"
+        },
+        {
+            "school": "all",
+            "level": "all",
+            "gender": "all",
+            "population": 15157,
+            "population_text": "All Stanford Students"
         },
         {
             "population": 68572,
             "population_text": "The City of Palo Alto"
         },
         {
-            "population": 85784,
-            "population_text": "Redwood City"
-        },
-        {
-            "population": 152770,
-            "population_text": "The City of Sunnyvale"
-        },
-        {
-            "population": 764442,
-            "population_text": "The County of San Mateo"
-        },
-        {
             "population": 1936259,
             "population_text": "The County of Santa Clara"
+        },
+        {
+            "population": 874961,
+            "population_text": "The City of San Francisco"
         },
         {
             "population": 9710000,
@@ -72,27 +369,58 @@
     "onetime": [
         {
             "type": "tuition",
-            "name": "Stanford Law School Tuition covered",
+            "school": "law",
+            "level": "grad",
+            "name": "Stanford Law School Tuition",
             "cost": 193050
         },
         {
             "type": "tuition",
-            "name": "Stanford Med School Tuition covered",
+            "school": "medicine",
+            "level": "grad",
+            "name": "Stanford MD Tuition",
             "cost": 254988
         },
         {
             "type": "tuition",
-            "name": "Stanford MBA Tuition covered",
+            "school": "gsb",
+            "level": "grad",
+            "name": "Stanford MBA Tuition",
             "cost": 149412
         },
         {
             "type": "tuition",
-            "name": "Stanford Masters in Engineering Tuition covered",
+            "school": "engineering",
+            "level": "grad",
+            "name": "Stanford Masters in Engineering Tuition",
             "cost": 75240
         },
         {
             "type": "tuition",
-            "name": "Stanford Undergrad Tuition covered",
+            "school": "humanities&sciences",
+            "level": "grad",
+            "name": "Stanford Non-Engineering Masters Tuition",
+            "cost": 70620
+        },
+        {
+            "type": "tuition",
+            "school": "earth",
+            "level": "grad",
+            "name": "Stanford Non-Engineering Masters Tuition",
+            "cost": 70620
+        },
+        {
+            "type": "tuition",
+            "school": "education",
+            "level": "grad",
+            "name": "Stanford Non-Engineering Masters Tuition",
+            "cost": 70620
+        },
+        {
+            "type": "tuition",
+            "school": "all",
+            "level": "undergrad",
+            "name": "Stanford Undergrad Tuition",
             "cost": 221892
         },
         {
@@ -112,8 +440,8 @@
         },
         {
             "type": "transportation",
-            "name": "a gallon of gas",
-            "cost": 4.78
+            "name": "12 gallons of gas",
+            "cost": 57
         },
         {
             "type": "transportation",

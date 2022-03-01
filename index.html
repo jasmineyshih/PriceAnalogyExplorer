@@ -133,42 +133,49 @@
                         <label for="cost">Enter Monthly Cost:</label>
                         <input type="text" id="costField" name="cost" value="320">
                     </div>
+                    <div id="categoryFiltersSection">
+                        <div>Show One-time Cost Categories:</div>
+                        <div id="categoryFiltersContainer"></div>
+                    </div>
                     <button onclick="updateAmount()">Find Analogy</button>
                 </div>
                 <div id="analogiesContainer" class="sidebarSections">
                     <div style="margin-bottom: 5px">Closest Analogy</div>
                     <div id="analogySentenceContainer">
                         <div id="analogySentence">$<span id="analogyAmount" class="analogyComponents">N</span> is roughly equivalent to the population of <span id="analogyPop" class="analogyComponents">Y</span> paying $<span id="monthlyCostAmount" class="analogyComponents">M</span> for <span id="analogyTime" class="analogyComponents">X</span></div>
-                        <div id="analogySentenceOnetime" style="display: none;">$<span id="analogyAmountOnetime" class="analogyComponents">N</span> is roughly equivalent to everyone in the population of <span id="analogyPopOnetime" class="analogyComponents">Y</span> getting <span id="analogyCostType" class="analogyComponents">C</span></div>
+                        <div id="analogySentenceOnetime">$<span id="analogyAmountOnetime" class="analogyComponents">N</span> is roughly equivalent to everyone in the population of <span id="analogyPopOnetime" class="analogyComponents">Y</span> getting <span id="analogyCostType" class="analogyComponents">C</span></div>
                         <div id="popTip">
                             <div class="arrowUp"></div>
                             <div id="popNumber">Y</div>
                         </div>
                     </div>
                 </div>
-                <div style="display: none;" id="categoryFiltersSection">
-                    <div>Show Categories:</div>
-                    <div id="categoryFiltersContainer"></div>
-                </div>
             </div>
         </div>
         
         
     </body>
-
     <script>
+        let userProfile = {
+            "school": "medicine",
+            "level": "grad",
+            "gender": "female"
+        };
         let currAnalogyType = 0;
         let amount = 1000000;
         let monthlyCostInput = 320;
+        let allPopulationData;
         let populationData;
         let onetimeData;
         let maxOnetimeAmount = 1000000000000;
         let dotsArray = [];
+        let onetimeCostDotsArray = [];  // onetime cost dots in time component graph
         let monthArray = [];
         let onetimeDotsArray;
         let excludedCategories = new Set();
         let monthToStringMap = {};
         let colors = d3.schemeTableau10;
+        colors.splice(2, 1);
         let colorMap = {};
         let x, y, r;
         let xOnetime, yOnetime;
@@ -176,7 +183,10 @@
         let selectedQuarter = null;
         let currAnalogyDot = null;
         let currOnetimeAnalogyDot = null;
+        let currOnetimeCostAnalogyDot = null;
+        let currBestAnalogy = null;
         let timeCompTooltip = d3.select("#timeCompTooltip");
+        let analogyBank = [];
 
         d3.select("#analogyPop")
             .on("mouseover", function () {
@@ -211,7 +221,8 @@
         let monthlyCostLineColor = "crimson";
 
         d3.json("data/population_and_costs.json").then(function (data) {
-            populationData = data.population;
+            allPopulationData = data.population;
+            filterPopulationByProfile();
             onetimeData = data.onetime;
             minPopulation = d3.min(populationData.map(dat => dat.population));
             maxPopulation = d3.max(populationData.map(dat => dat.population));

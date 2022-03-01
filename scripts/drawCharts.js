@@ -3,6 +3,10 @@ function drawChartWithTimeComponent (dataset) {
     for (let i = 1; i <= 60; i++) {
         monthArray.push(i);
     }
+    for (let i = 1; i <= 3; i++) {
+        monthArray.push(2.3 * i);   // quarters
+    }
+    monthArray.sort();
     x = d3.scaleLog()
         .domain([minPopulation/2, maxPopulation])
         .range([0, width]);
@@ -31,12 +35,12 @@ function drawChartWithTimeComponent (dataset) {
         .text("↑ Time");
 
     // y-axis labels
-    let months = [1, 3, 6, 12, 18, 24, 36, 48, 60];
+    let months = [1, 2.3, 3, 4.6, 6, 6.9, 12, 18, 24, 36, 48, 60];
     for (let i = 0; i < months.length; i++) {
         let month = months[i];
         let yPos = y(month);
         timeCompSvg.append("line")
-            .attr("x1", -15)
+            .attr("x1", -10)
             .attr("y1", yPos)
             .attr("x2", width)
             .attr("y2", yPos)
@@ -45,16 +49,25 @@ function drawChartWithTimeComponent (dataset) {
         let text = `${month} Month${month > 1 ? "s" : ""}`;
         if (month % 12 == 0) {
             text = `${month / 12} Year${month / 12 > 1 ? "s" : ""}`;
+        } else if ((month * 10) % 23 == 0) {
+            text = `${(month * 10) / 23} Quarter${month / 2.3 > 1 ? "s" : ""}`;
         }
         monthToStringMap[month] = text;
         timeCompSvg.append("text")
-            .attr("x", -20)
+            .attr("x", -10)
             .attr("y", yPos + 3)
             .attr("fill", "currentColor")
             .attr("text-anchor", "end")
             .text(text)
             .classed("axisLabel", true);
     }
+    timeCompSvg.append("text")  // one-time cost text
+        .attr("x", -10)
+        .attr("y", y(0.23)+5)
+        .attr("fill", "currentColor")
+        .attr("text-anchor", "end")
+        .text("One-Time")
+        .classed("axisLabel", true);
     dotsArray = [];
     months.forEach(month => {
         dataset.forEach(d => {
@@ -66,13 +79,15 @@ function drawChartWithTimeComponent (dataset) {
                 //population_multiplier: parseFloat((amount / d.cost / month / d.population).toFixed(2)),
                 id: d.id
             }
-            entry.multipler = entry.amountTo / amount;
+            entry.multiplier = entry.amountTo / amount;
             dotsArray.push(entry);
         });
     });
     drawPopulationLines(timeCompSvg, x);
     timeCompSvg.append("g").classed("gridDotsGroup", true);
+    timeCompSvg.append("g").classed("onetimeCostDotsGroup", true);
     drawOrUpdateDots();
+    drawOrUpdateOnetimeCostDots();
     findClosestAnalogy();
 
     monthArray.forEach(m => {
@@ -103,12 +118,57 @@ function drawOrUpdateDots() {
                     .classed("dots", true)
                     .on('mouseover', tooltipMouseover)
                     .on('mouseleave', tooltipMouseleave)
-                    .attr("id", d => `c${d.time}c${d.id}`);
+                    .attr("id", d => `c${Number.isInteger(d.time) ? d.time : d.time * 10}c${d.id}`);
             },
             update => {
                 return update.attr("cx", function (d) { return x(d.population); })
-                    .attr("cy", function (d) { return y(d.time); })
-                    .attr("r", d => d.population_multiplier === 0 ? 0 : r(d.population_multiplier));
+                    .attr("cy", function (d) { return y(d.time); });
+            },
+            exit => {
+                return exit.remove();
+            }
+        );
+}
+function drawOrUpdateOnetimeCostDots() {
+    onetimeCostDotsArray = [];
+    onetimeData.filter(d => {
+        if (d.type == "tuition") {
+            return userProfile.school == d.school || (userProfile.level == "undergrad" && d.level == "undergrad");
+        } else {
+            return true;
+        }
+    }).forEach(d => {
+        let pop = amount / d.cost;
+        if (!excludedCategories.has(d.type) && pop >= minPopulation/2 && pop <= maxPopulation) {
+            onetimeCostDotsArray.push({
+                id: d.id,
+                cost: d.cost,
+                name: d.name,
+                type: d.type,
+                population: pop
+            });
+        }
+    });
+    timeCompSvg.select(".onetimeCostDotsGroup").selectAll(".dots")
+        .data(onetimeCostDotsArray)
+        .join(
+            enter => { 
+                return enter.append("circle")
+                    .attr("cx", function (d) { return x(d.population); })
+                    .attr("cy", function (d) { return y(0.23); })   // draw on pop = 0 line
+                    .attr("r", 6)
+                    .style("opacity", 0.6)
+                    .style("fill", d => colorMap[d.type])
+                    .classed("dots", true)
+                    .classed("onetimeCostDotsGroup", true)
+                    .on('mouseover', tooltipMouseover)
+                    .on('mouseleave', tooltipMouseleave)
+                    .attr("id", d => `oc${d.id}`);
+            },
+            update => {
+                return update.attr("cx", function (d) { return x(d.population); })
+                    .style("fill", d => colorMap[d.type])
+                    .attr("id", d => `oc${d.id}`);
             },
             exit => {
                 return exit.remove();
@@ -150,6 +210,7 @@ function updateAmount() {
     oneTimeSvg.select("#onetimeCurrAmountText")
         .attr("y", amountYpos -3)
         .text(amount.toLocaleString());
+    drawOrUpdateOnetimeCostDots();
     updateOneTimeDots();
     updateMonthlyCost();
 }
@@ -169,7 +230,7 @@ function updateMonthlyCost() {
 function updateDots() {
     dotsArray.forEach(dot => {
         dot.amountTo = dot.population * monthlyCostInput * dot.time;
-        dot.multipler = dot.amountTo / amount;
+        dot.multiplier = dot.amountTo / amount;
     });
     findClosestAnalogy();
 }
@@ -178,7 +239,7 @@ function updateOneTimeDots() {
         dot.freePrize = amount / dot.population;
     });
     drawOrUpdateOneTimeDots();
-    findClosestOnetimeAnalogy();
+    //findClosestOnetimeAnalogy();
 }
 function lineFunct(data, xScale, yScale, xAttr, yAttr) {
     return d3.line().x(d => xScale(d[xAttr])).y(d => yScale(d[yAttr]))(data);
@@ -280,32 +341,42 @@ function drawOneTimeCostChart () {
     });
     oneTimeSvg.append("g").classed("gridDotsGroup", true);
     drawOrUpdateOneTimeDots();
-    findClosestOnetimeAnalogy();
+    //findClosestOnetimeAnalogy();
 }
 
 let tooltipMouseover = function (e, d) {
     let amountTo = d.population * monthlyCostInput * d.time;
-    if (d3.select(this).attr("id") != currAnalogyDot.attr("id") && d3.select(this).attr("id") != currOnetimeAnalogyDot.attr("id")) {
+    let isOnetime = d3.select(this).classed("onetimeCostDotsGroup");
+    if (!isOnetime && currAnalogyDot && d3.select(this).attr("id") != currAnalogyDot.attr("id") /*&& d3.select(this).attr("id") != currOnetimeAnalogyDot.attr("id")*/) {
         d3.select(this)
             .style("opacity", 0.5);
+    } else if (isOnetime && currOnetimeCostAnalogyDot && d3.select(this).attr("id") != currOnetimeCostAnalogyDot.attr("id")) {
+        d3.select(this)
+            .style("opacity", 0.85);
     }
     let text = "";
     if (currAnalogyType == 0) {
-        text = `The population of ${d.population_text}<br>paying $${monthlyCostInput}/month<br>for ${monthToStringMap[d.time]}<br>amounts to $${(amountTo).toLocaleString()} (~${(amountTo / amount).toFixed(1)}x target amount)`;
+        text = isOnetime ?
+            `${Math.round(d.population).toLocaleString()} people get ${d.name} ($${d.cost.toLocaleString()})`
+            :`The population of ${d.population_text}<br>paying $${monthlyCostInput}/month<br>for ${monthToStringMap[d.time]}<br>amounts to $${(amountTo).toLocaleString()} (~${(amountTo / amount).toFixed(1)}x target amount)`;
     } else {
         text = `Everyone in the population of ${d.population_text}<br>gets $${Math.round(d.freePrize)}`;
     }
-    d3.select("#timeCompTooltip").style("opacity", 1)
+    let tp = d3.select("#timeCompTooltip").style("opacity", 1)
         .html(text)
         .style("left", (e.x + 10) + "px")
         .style("top", (e.y + "px"));
 };
 let tooltipMouseleave = function (e, d) {
-    if (d3.select(this).attr("id") != currAnalogyDot.attr("id") && d3.select(this).attr("id") != currOnetimeAnalogyDot.attr("id")) {
+    let isOnetime = d3.select(this).classed("onetimeCostDotsGroup");
+    if (!isOnetime && currAnalogyDot && d3.select(this).attr("id") != currAnalogyDot.attr("id") /*&& d3.select(this).attr("id") != currOnetimeAnalogyDot.attr("id")*/) {
         d3.select(this)
             .transition()
             .duration(100)
             .style("opacity", 0);
+    } else if (isOnetime && currOnetimeCostAnalogyDot && d3.select(this).attr("id") != currOnetimeCostAnalogyDot.attr("id")) {
+        d3.select(this)
+            .style("opacity", 0.6);
     }
     d3.select("#timeCompTooltip")
         .transition()
@@ -327,24 +398,56 @@ let hideOnetimeCostTooltip = function () {
 };
 
 function findClosestAnalogy () {
-    let smallestMultDiff = Infinity;
-    let closestMultDot = null;
-    dotsArray.forEach(dot => {
-        let multDiff = Math.abs(dot.multipler - 1);
-        if (multDiff < smallestMultDiff) {
-            smallestMultDiff = multDiff;
-            closestMultDot = dot;
-        }
+    analogyBank = dotsArray.map(ana => {
+        let obj = JSON.parse(JSON.stringify(ana));
+        obj.diff = Math.abs(obj.multiplier - 1);
+        obj.analogyType = "recurring";
+        return obj;
     });
-    d3.select("#analogyAmount").html(amount.toLocaleString());
-    d3.select("#analogyPop").html(closestMultDot.population_text);
-    d3.select("#analogyTime").html(monthToStringMap[closestMultDot.time]);
-    d3.select("#monthlyCostAmount").html(monthlyCostInput.toLocaleString());
-    d3.select("#popNumber").html(closestMultDot.population.toLocaleString());
+    onetimeCostDotsArray.forEach(dot => {
+        let obj = JSON.parse(JSON.stringify(dot));
+        let smallestPopDiff = Infinity;
+        let closestPopDot = null;
+        populationData.forEach(pop => {
+            let popDiff = Math.abs(obj.population - pop.population) / pop.population;
+            if (popDiff < smallestPopDiff) {
+                smallestPopDiff = popDiff;
+                closestPopDot = pop;
+            }
+        });
+        obj.diff = Math.abs((obj.cost * closestPopDot.population / amount) - 1);
+        obj.popId = closestPopDot.id;
+        obj.population_text = closestPopDot.population_text;
+        obj.analogyType = "onetime";
+        analogyBank.push(obj);
+    });
+    analogyBank.sort((a, b) => a.diff - b.diff);
+    currBestAnalogy = analogyBank[0];
     if (currAnalogyDot != null) {
         currAnalogyDot.style('opacity', 0);
+        currAnalogyDot = null;
     }
-    currAnalogyDot = d3.select(`#c${closestMultDot.time}c${closestMultDot.id}`).style('opacity', 0.8);
+    if (currOnetimeCostAnalogyDot != null) {
+        currOnetimeCostAnalogyDot.style('opacity', 0.6);
+        currOnetimeCostAnalogyDot = null;
+    }
+    if (currBestAnalogy.analogyType == "recurring") {
+        hideOrDisplayById("analogySentenceOnetime", false);
+        hideOrDisplayById("analogySentence");
+        d3.select("#analogyAmount").html(amount.toLocaleString());
+        d3.select("#analogyPop").html(currBestAnalogy.population_text);
+        d3.select("#analogyTime").html(monthToStringMap[currBestAnalogy.time]);
+        d3.select("#monthlyCostAmount").html(monthlyCostInput.toLocaleString());
+        d3.select("#popNumber").html(currBestAnalogy.population.toLocaleString());
+        currAnalogyDot = d3.select(`#c${Number.isInteger(currBestAnalogy.time) ? currBestAnalogy.time : currBestAnalogy.time * 10}c${currBestAnalogy.id}`).style('opacity', 0.8);
+    } else {
+        hideOrDisplayById("analogySentence", false);
+        hideOrDisplayById("analogySentenceOnetime");
+        d3.select("#analogyAmountOnetime").html(amount.toLocaleString());
+        d3.select("#analogyPopOnetime").html(currBestAnalogy.population_text);
+        d3.select("#analogyCostType").html(`${currBestAnalogy.name} ($${currBestAnalogy.cost.toLocaleString()})`);
+        currOnetimeCostAnalogyDot = d3.select(`#oc${currBestAnalogy.id}`).style('opacity', 1);
+    }
 }
 
 function updateShownCategories (categoryName) {
@@ -355,22 +458,19 @@ function updateShownCategories (categoryName) {
         excludedCategories.add(categoryName);
         d3.selectAll(`.${categoryName}CostLine`).style("display", "none");
     }
-    findClosestOnetimeAnalogy();
+    drawOrUpdateOnetimeCostDots();
+    //findClosestOnetimeAnalogy();
 }
 
 function findClosestOnetimeAnalogy () {
     let smallestMultDiff = Infinity;
     let closestMultDot = null;
     let type = null;
-    console.log(excludedCategories);
-    console.log(onetimeDotsArray);
     onetimeDotsArray.forEach(dot => {
         onetimeData.forEach(d => {
             if (!excludedCategories.has(d.type)) {
                 let multDiff = Math.abs(dot.freePrize - d.cost) / dot.freePrize;
                 if (multDiff < smallestMultDiff) {
-                    console.log(dot);
-                    console.log(dot.freePrize, d.cost);
                     smallestMultDiff = multDiff;
                     closestMultDot = dot;
                     type = d;
@@ -378,7 +478,6 @@ function findClosestOnetimeAnalogy () {
             }
         })
     });
-    console.log(closestMultDot);
     d3.select("#analogyAmountOnetime").html(amount.toLocaleString());
     d3.select("#analogyPopOnetime").html(closestMultDot.population_text);
     d3.select("#analogyCostType").html(`${type.name} ($${type.cost.toLocaleString()})`);
@@ -396,14 +495,12 @@ function switchAnalogyType () {
         hideOrDisplayById("viz", false);
         hideOrDisplayById("analogySentence", false);
         hideOrDisplayById("analogySentenceOnetime");
-        hideOrDisplayById("categoryFiltersSection");
         hideOrDisplayById("oneTimeCostViz");
     } else {
         hideOrShowById("monthlyCostInput");
         hideOrDisplayById("viz");
         hideOrDisplayById("analogySentence");
         hideOrDisplayById("analogySentenceOnetime", false);
-        hideOrDisplayById("categoryFiltersSection", false);
         hideOrDisplayById("oneTimeCostViz", false);
     }
 }
@@ -421,4 +518,15 @@ function hideOrDisplayById(id, show=true) {
     } else {
         d3.select("#"+id).style("display", "none");
     }
+}
+
+function filterPopulationByProfile() {
+    populationData = allPopulationData.filter((pop) => {
+        if (pop.school == undefined) {  // keep all general populations
+            return true;
+        }
+        return Object.keys(userProfile).every(infoType => {
+            return pop[infoType] == "all" || pop[infoType] == userProfile[infoType];
+        });
+    });
 }
