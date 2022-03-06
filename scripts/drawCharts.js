@@ -1,6 +1,7 @@
 function drawChartWithTimeComponent (dataset) {
+    let maxMonths = 50 * 12;
     monthArray.push(0.23);   // a week
-    for (let i = 1; i <= 60; i++) {
+    for (let i = 1; i <= maxMonths; i++) {
         monthArray.push(i);
     }
     for (let i = 1; i <= 3; i++) {
@@ -23,7 +24,7 @@ function drawChartWithTimeComponent (dataset) {
 
         // Add Y axis
     y = d3.scaleLog()
-        .domain([0.23, 5 * 12])
+        .domain([0.23, maxMonths])
         .range([height, 0]);
     let yAxis = timeCompSvg.append("g")
         .call(d3.axisLeft(y).tickValues([]));
@@ -35,7 +36,7 @@ function drawChartWithTimeComponent (dataset) {
         .text("↑ Time");
 
     // y-axis labels
-    let months = [1, 2.3, 3, 4.6, 6, 6.9, 12, 18, 24, 36, 48, 60];
+    months = [1, 2.3, 3, 4.6, 6, 6.9, 12, 18, 24, 36, 48, 60, 120, 180, 240, 300, 360, 600];
     for (let i = 0; i < months.length; i++) {
         let month = months[i];
         let yPos = y(month);
@@ -69,28 +70,16 @@ function drawChartWithTimeComponent (dataset) {
         .text("One-Time")
         .classed("axisLabel", true);
     dotsArray = [];
-    months.forEach(month => {
-        dataset.forEach(d => {
-            let entry = {
-                time: month,
-                population: d.population,
-                population_text: d.population_text,
-                amountTo: d.population * monthlyCostInput * month,
-                //population_multiplier: parseFloat((amount / d.cost / month / d.population).toFixed(2)),
-                id: d.id
-            }
-            entry.multiplier = entry.amountTo / amount;
-            dotsArray.push(entry);
-        });
-    });
+    updateDots();
+    timeCompSvg.append("g").classed("populationLines", true);
+    timeCompSvg.append("g").classed("populationLabels", true);
     drawPopulationLines(timeCompSvg, x);
     timeCompSvg.append("g").classed("gridDotsGroup", true);
     timeCompSvg.append("g").classed("onetimeCostDotsGroup", true);
-    drawOrUpdateDots();
-    drawOrUpdateOnetimeCostDots();
+    d3.select("#analogyAmount").html(amount.toLocaleString());
     findClosestAnalogy();
 
-    monthArray.forEach(m => {
+    /*monthArray.forEach(m => {
         let xVal = amount / monthlyCostInput / m;
         if (xVal >= minPopulation / 2 && xVal <= maxPopulation) {
             costLineArray.push({x: xVal, y: m});
@@ -101,20 +90,29 @@ function drawChartWithTimeComponent (dataset) {
         .attr("stroke", monthlyCostLineColor)
         .attr("stroke-width", 3)
         .attr("d", lineFunct(costLineArray, x, y, "x", "y"))
-        .attr("id", "costCurve");
+        .attr("id", "costCurve");*/
 }
 
 function drawOrUpdateDots() {
+    let dotsSet = new Set();
+    let uniqueDots = [];
+    analogyBank.filter(dot => dot.analogyType == "recurring").forEach(dot => {
+        let dotId = `${dot.time},${dot.population}`;
+        if (!dotsSet.has(dotId)) {
+            uniqueDots.push(dot);
+            dotsSet.add(dotId);
+        }
+    });
     timeCompSvg.select(".gridDotsGroup").selectAll(".dots")
-        .data(dotsArray)
+        .data(uniqueDots)
         .join(
             enter => { 
                 return enter.append("circle")
                     .attr("cx", function (d) { return x(d.population); })
                     .attr("cy", function (d) { return y(d.time); })
-                    .attr("r", 8)
-                    .style("fill", dotFill)
-                    .style("opacity", 0)
+                    .attr("r", 6)
+                    .style("fill", (d) => d.isTop5 ? dotFill : "gray")
+                    .style("opacity", 0.6)
                     .classed("dots", true)
                     .on('mouseover', tooltipMouseover)
                     .on('mouseleave', tooltipMouseleave)
@@ -122,7 +120,9 @@ function drawOrUpdateDots() {
             },
             update => {
                 return update.attr("cx", function (d) { return x(d.population); })
-                    .attr("cy", function (d) { return y(d.time); });
+                    .attr("cy", function (d) { return y(d.time); })
+                    .style("fill", (d) => d.isTop5 ? dotFill : "gray")
+                    .attr("id", d => `c${Number.isInteger(d.time) ? d.time : d.time * 10}c${d.id}`);
             },
             exit => {
                 return exit.remove();
@@ -130,35 +130,17 @@ function drawOrUpdateDots() {
         );
 }
 function drawOrUpdateOnetimeCostDots() {
-    onetimeCostDotsArray = [];
-    onetimeData.filter(d => {
-        if (d.type == "tuition") {
-            return userProfile.school == d.school || (userProfile.level == "undergrad" && d.level == "undergrad");
-        } else {
-            return true;
-        }
-    }).forEach(d => {
-        let pop = amount / d.cost;
-        if (!excludedCategories.has(d.type) && pop >= minPopulation/2 && pop <= maxPopulation) {
-            onetimeCostDotsArray.push({
-                id: d.id,
-                cost: d.cost,
-                name: d.name,
-                type: d.type,
-                population: pop
-            });
-        }
-    });
+    let onetimeAnalogies = analogyBank.filter(a => a.analogyType == "onetime");
     timeCompSvg.select(".onetimeCostDotsGroup").selectAll(".dots")
-        .data(onetimeCostDotsArray)
+        .data(onetimeAnalogies)
         .join(
             enter => { 
                 return enter.append("circle")
-                    .attr("cx", function (d) { return x(d.population); })
+                    .attr("cx", function (d) { return d.isTop5 ? x(d.populationObj.population) : x(d.population); })
                     .attr("cy", function (d) { return y(0.23); })   // draw on pop = 0 line
                     .attr("r", 6)
                     .style("opacity", 0.6)
-                    .style("fill", d => colorMap[d.type])
+                    .style("fill", d => d.isTop5 ? dotFill : "gray")//colorMap[d.type])
                     .classed("dots", true)
                     .classed("onetimeCostDotsGroup", true)
                     .on('mouseover', tooltipMouseover)
@@ -166,8 +148,8 @@ function drawOrUpdateOnetimeCostDots() {
                     .attr("id", d => `oc${d.id}`);
             },
             update => {
-                return update.attr("cx", function (d) { return x(d.population); })
-                    .style("fill", d => colorMap[d.type])
+                return update.attr("cx", function (d) { return d.isTop5 ? x(d.populationObj.population) : x(d.population); })
+                    .style("fill", d => d.isTop5 ? dotFill : "gray")//colorMap[d.type])
                     .attr("id", d => `oc${d.id}`);
             },
             exit => {
@@ -199,8 +181,9 @@ function drawOrUpdateOneTimeDots() {
             }
         );
 }
-function updateAmount() {
-    amount = parseInt(document.getElementById('amountField').value, 10);
+function updateAmount(newAmount) {
+    amount = newAmount; //parseInt(document.getElementById('amountField').value, 10);
+    d3.select("#analogyAmount").html(amount.toLocaleString());
     let amountYpos = yOnetime(amount);
     oneTimeSvg.select("#onetimeCurrAmountLine")
         .attr("x1", -100)
@@ -210,9 +193,9 @@ function updateAmount() {
     oneTimeSvg.select("#onetimeCurrAmountText")
         .attr("y", amountYpos -3)
         .text(amount.toLocaleString());
-    drawOrUpdateOnetimeCostDots();
+    updateDots();
     updateOneTimeDots();
-    updateMonthlyCost();
+    //updateMonthlyCost();
 }
 function updateMonthlyCost() {
     monthlyCostInput = parseInt(document.getElementById('costField').value, 10);
@@ -228,9 +211,53 @@ function updateMonthlyCost() {
     updateDots();
 }
 function updateDots() {
-    dotsArray.forEach(dot => {
-        dot.amountTo = dot.population * monthlyCostInput * dot.time;
-        dot.multiplier = dot.amountTo / amount;
+    dotsArray = [];
+    months.forEach(month => {
+        populationData.forEach(d => {
+            recurringData.forEach(rec => {
+                if (rec.max_time == undefined || month <= rec.max_time) {
+                    if ((rec.time_unit == 1 && ((month * 10) % 23 != 0)) || (rec.time_unit == 2.3 && ((month * 10) % 23 == 0))) {
+                        if (rec.level == undefined || (rec.level != undefined && rec.level == userProfile.level)) {
+                            if ((d.school == undefined && !rec.studentonly) || (d.school && !rec.nonstudent)) {
+                                let entry = {
+                                    time: month,
+                                    populationObj: d,
+                                    population: d.population,
+                                    population_text: d.population_text,
+                                    amountTo: d.population * rec.cost * month,
+                                    timeUnit: rec.time_unit,
+                                    unitCost: rec.cost,
+                                    costName: rec.cost_name,
+                                    //population_multiplier: parseFloat((amount / d.cost / month / d.population).toFixed(2)),
+                                    id: d.id
+                                }
+                                entry.multiplier = entry.amountTo / amount;
+                                dotsArray.push(entry);
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    });
+    onetimeCostDotsArray = [];
+    onetimeData.filter(d => {
+        if (d.type == "tuition") {
+            return userProfile.school == d.school || (userProfile.level == "undergrad" && d.level == "undergrad");
+        } else {
+            return true;
+        }
+    }).forEach(d => {
+        let pop = amount / d.cost;
+        if (!excludedCategories.has(d.type) && pop >= minPopulation/2 && pop <= maxPopulation) {
+            onetimeCostDotsArray.push({
+                id: d.id,
+                cost: d.cost,
+                name: d.name,
+                type: d.type,
+                population: pop
+            });
+        }
     });
     findClosestAnalogy();
 }
@@ -263,8 +290,19 @@ function drawOnetimeCostLine(obj) {
         .on("mouseout", hideOnetimeCostTooltip);
 }
 function drawPopulationLines(svgObj, xScale) {
-    svgObj.append("g").classed("populationLines", true);
-    svgObj.append("g").classed("populationLabels", true);
+    svgObj.select(".populationLines").selectAll("*").remove();
+    svgObj.select(".populationLabels").selectAll("*").remove();
+    svgObj.select(".xAxisGroup").remove();
+    svgObj.append("g")
+        .attr("transform", `translate(0, ${height})`)
+        .classed("xAxisGroup", true)
+        .call(d3.axisBottom(xScale).tickValues(populationData.map(d => d.population)).tickFormat((d, i) => `${populationData[i].population_text} (${populationData[i].population.toLocaleString()})`));
+    d3.select(".xAxisGroup").append("text")
+        .attr("x", width + 10)
+        .attr("y", 5)
+        .attr("fill", "currentColor")
+        .attr("text-anchor", "start")
+        .text("Population →");
     for (let i = 0; i < populationData.length; i++) {
         let xPos = xScale(populationData[i].population);
         svgObj.select(".populationLines").append("line")
@@ -345,43 +383,33 @@ function drawOneTimeCostChart () {
 }
 
 let tooltipMouseover = function (e, d) {
-    let amountTo = d.population * monthlyCostInput * d.time;
-    let isOnetime = d3.select(this).classed("onetimeCostDotsGroup");
-    if (!isOnetime && currAnalogyDot && d3.select(this).attr("id") != currAnalogyDot.attr("id") /*&& d3.select(this).attr("id") != currOnetimeAnalogyDot.attr("id")*/) {
-        d3.select(this)
-            .style("opacity", 0.5);
-    } else if (isOnetime && currOnetimeCostAnalogyDot && d3.select(this).attr("id") != currOnetimeCostAnalogyDot.attr("id")) {
-        d3.select(this)
-            .style("opacity", 0.85);
-    }
+    d3.select(this)
+        .style("opacity", 0.9);
     let text = "";
-    if (currAnalogyType == 0) {
-        text = isOnetime ?
-            `${Math.round(d.population).toLocaleString()} people get ${d.name} ($${d.cost.toLocaleString()})`
-            :`The population of ${d.population_text}<br>paying $${monthlyCostInput}/month<br>for ${monthToStringMap[d.time]}<br>amounts to $${(amountTo).toLocaleString()} (~${(amountTo / amount).toFixed(1)}x target amount)`;
+    if (d.analogyType == "recurring") {
+        text = `${monthToStringMap[d.time]} of ${d.costName} for ${d.population_text} amounts to $${(d.amountTo).toLocaleString()} (~${(d.amountTo / amount).toFixed(1)}x target amount)`;
     } else {
-        text = `Everyone in the population of ${d.population_text}<br>gets $${Math.round(d.freePrize)}`;
+        let amountTo = d.cost * d.populationObj.population;
+        text = d.isTop5 ? 
+            `${d.population_text} getting ${d.name} ($${d.cost.toLocaleString()}) amounts to $${amountTo.toLocaleString()} (~${(amountTo / amount).toFixed(1)}x target amount)`
+            : `${Math.round(d.population).toLocaleString()} people get ${d.name} ($${d.cost.toLocaleString()})`;
     }
-    let tp = d3.select("#timeCompTooltip").style("opacity", 1)
+    let tp = d3.select("#timeCompTooltip").style("display", "block")
         .html(text)
         .style("left", (e.x + 10) + "px")
         .style("top", (e.y + "px"));
+    if (d.isTop5) {
+        d3.select(`#analogy${d.rank}`).classed("highlightedAnalogy", true);
+    }
 };
 let tooltipMouseleave = function (e, d) {
-    let isOnetime = d3.select(this).classed("onetimeCostDotsGroup");
-    if (!isOnetime && currAnalogyDot && d3.select(this).attr("id") != currAnalogyDot.attr("id") /*&& d3.select(this).attr("id") != currOnetimeAnalogyDot.attr("id")*/) {
-        d3.select(this)
-            .transition()
-            .duration(100)
-            .style("opacity", 0);
-    } else if (isOnetime && currOnetimeCostAnalogyDot && d3.select(this).attr("id") != currOnetimeCostAnalogyDot.attr("id")) {
-        d3.select(this)
-            .style("opacity", 0.6);
-    }
+    d3.selectAll(".highlightedAnalogy").classed("highlightedAnalogy", false);
+    d3.select(this)
+        .style("opacity", 0.6);
     d3.select("#timeCompTooltip")
         .transition()
         .duration(100)
-        .style("opacity", 0);
+        .style("display", "none");
 };
 
 let showOnetimeCostTooltip = function (e, d) {
@@ -417,37 +445,116 @@ function findClosestAnalogy () {
         });
         obj.diff = Math.abs((obj.cost * closestPopDot.population / amount) - 1);
         obj.popId = closestPopDot.id;
+        obj.populationObj = closestPopDot;
         obj.population_text = closestPopDot.population_text;
+        obj.pop = closestPopDot.population;
         obj.analogyType = "onetime";
         analogyBank.push(obj);
     });
-    analogyBank.sort((a, b) => a.diff - b.diff);
-    currBestAnalogy = analogyBank[0];
-    if (currAnalogyDot != null) {
-        currAnalogyDot.style('opacity', 0);
-        currAnalogyDot = null;
-    }
-    if (currOnetimeCostAnalogyDot != null) {
-        currOnetimeCostAnalogyDot.style('opacity', 0.6);
-        currOnetimeCostAnalogyDot = null;
-    }
-    if (currBestAnalogy.analogyType == "recurring") {
-        hideOrDisplayById("analogySentenceOnetime", false);
-        hideOrDisplayById("analogySentence");
-        d3.select("#analogyAmount").html(amount.toLocaleString());
-        d3.select("#analogyPop").html(currBestAnalogy.population_text);
-        d3.select("#analogyTime").html(monthToStringMap[currBestAnalogy.time]);
-        d3.select("#monthlyCostAmount").html(monthlyCostInput.toLocaleString());
-        d3.select("#popNumber").html(currBestAnalogy.population.toLocaleString());
-        currAnalogyDot = d3.select(`#c${Number.isInteger(currBestAnalogy.time) ? currBestAnalogy.time : currBestAnalogy.time * 10}c${currBestAnalogy.id}`).style('opacity', 0.8);
-    } else {
-        hideOrDisplayById("analogySentence", false);
-        hideOrDisplayById("analogySentenceOnetime");
-        d3.select("#analogyAmountOnetime").html(amount.toLocaleString());
-        d3.select("#analogyPopOnetime").html(currBestAnalogy.population_text);
-        d3.select("#analogyCostType").html(`${currBestAnalogy.name} ($${currBestAnalogy.cost.toLocaleString()})`);
-        currOnetimeCostAnalogyDot = d3.select(`#oc${currBestAnalogy.id}`).style('opacity', 1);
-    }
+    applyEnergyFunction(analogyBank);
+    analogyBank.sort((a, b) => {
+        if (userProfile.school == "")
+            return a.diff - b.diff;
+        let scoreDiff = a.score.total - b.score.total;
+        if (scoreDiff != 0) return scoreDiff;
+        let popDiff = a.score.populationScore - b.score.populationScore;
+        if (popDiff != 0) return popDiff;
+        return a.diff - b.diff;
+    });
+    analogyBank.forEach((a, ind) => {
+        a.isTop5 = ind < 5 ? true : false;
+        a.rank = ind;
+    })
+    currBestAnalogies = analogyBank.slice(0, 5);
+    updateAnalogies();
+    drawOrUpdateDots();
+    drawOrUpdateOnetimeCostDots();
+}
+
+function applyEnergyFunction(analogies) {
+    analogies.forEach(analogy => {
+        // amount accuracy
+        let accuracyScore = 0;
+        if (analogy.diff >= 0.05 && analogy.diff < 0.1) {
+            accuracyScore = 1; 
+        } else if (analogy.diff >= 0.1) {
+            accuracyScore = analogy.diff * 20;
+        }
+        // population
+        let populationScore = 0;
+        if (analogy.populationObj.major == userProfile.major) {
+            if (analogy.populationObj.level == userProfile.level && analogy.populationObj.gender == userProfile.gender) {
+                populationScore = 0;
+            } else if (analogy.populationObj.level == userProfile.level) {
+                populationScore = 0.5;
+            } else {
+                populationScore = 1;
+            }
+        } else {
+            if (["All Stanford Students", "The State of California Population"].includes(analogy.populationObj.population_text)) {
+                populationScore = 1;
+            } else if (analogy.populationObj.school == userProfile.school) {
+                populationScore = 2;
+            } else if (analogy.populationObj.school != undefined) {
+                populationScore = 3;
+            } else {
+                populationScore = 4;
+            }
+        }
+        // time
+        let timeScore = 0;  // one-time costs get no penalty
+        if (analogy.analogyType == "recurring") {
+            if (analogy.time == 1 || analogy.time == 2.3) {
+                timeScore = 0;
+            } else if ((analogy.time * 10) % 23 == 0 || analogy.time == 12 || analogy.time == 24) { // multiple of a quarter
+                timeScore = 1;
+            } else if (analogy.populationObj.level == "undergrad" && (analogy.time == 36 || analogy.time == 48)) {
+                timeScore = 1;
+            } else {
+                timeScore = 2;
+            }
+        }
+        // car
+        let carScore = 0;
+        if (userProfile.car == "no") {
+            if (analogy.name == "12 gallons of gas") {  // gas not useful to non car owners
+                carScore = 3;
+            }
+        } else {    // car owners less aware of car prices
+            if (["a Toyota Corolla", "a Toyota Prius", "a Tesla Model 3"].includes(analogy.name)) {
+                carScore = 2;
+            }
+        }
+        analogy.score = {
+            total: accuracyScore + populationScore + timeScore + carScore,
+            accuracyScore: accuracyScore,
+            populationScore: populationScore,
+            timeScore: timeScore,
+            carScore: carScore
+        };
+    });
+}
+
+function updateAnalogies() {
+    currBestAnalogies.forEach((analogy, index) => {
+        let elementId = "analogy" + index;
+        if (analogy.analogyType == "recurring") {
+            d3.select(`#${elementId}`).select(".analogySentenceOnetime").style("display", "none");
+            d3.select(`#${elementId}`).select(".analogySentence").style("display", "block");
+            d3.select(`#${elementId}`).select(".analogyPop").html(analogy.population_text);
+            d3.select(`#${elementId}`).select(".analogyTime").html(monthToStringMap[analogy.time]);
+            d3.select(`#${elementId}`).select(".monthlyCostAmount").html(`${analogy.costName} ($${analogy.unitCost.toLocaleString()} per ${analogy.timeUnit == 1 ? "month" : "quarter"})`);
+            d3.select(`#${elementId}`).select(".popNumber").html(analogy.population.toLocaleString());
+            //currAnalogyDot = d3.select(`#c${Number.isInteger(currBestAnalogy.time) ? currBestAnalogy.time : currBestAnalogy.time * 10}c${currBestAnalogy.id}`).style('opacity', 0.8);
+        } else {
+            d3.select(`#${elementId}`).select(".analogySentenceOnetime").style("display", "block");
+            d3.select(`#${elementId}`).select(".analogySentence").style("display", "none");
+            d3.select(`#${elementId}`).select(".analogyPopOnetime").html(analogy.population_text);
+            d3.select(`#${elementId}`).select(".analogyCostType").html(`${analogy.name} ($${analogy.cost.toLocaleString()})`);
+            d3.select(`#${elementId}`).select(".popNumber").html(analogy.pop.toLocaleString());
+            d3.select("#analogyCostType").html(`${analogy.name} ($${analogy.cost.toLocaleString()})`);
+        }
+    });
 }
 
 function updateShownCategories (categoryName) {
@@ -505,6 +612,18 @@ function switchAnalogyType () {
     }
 }
 
+function switchDisplayType () {
+    currAnalogyType = (currAnalogyType + 1) % 2;
+    d3.select("#switchButtonText").html(currAnalogyType == 0 ? "Visualization View" : "Tweet View");
+    if (currAnalogyType == 1) {
+        hideOrDisplayById("tweetComponent", false);
+        hideOrDisplayById("vizContainer");
+    } else {
+        hideOrDisplayById("tweetComponent");
+        hideOrDisplayById("vizContainer", false);
+    }
+}
+
 function hideOrShowById(id, show=true) {
     if (show) {
         d3.select("#"+id).style("visibility", "visible");
@@ -521,12 +640,54 @@ function hideOrDisplayById(id, show=true) {
 }
 
 function filterPopulationByProfile() {
-    populationData = allPopulationData.filter((pop) => {
+    var select = document.getElementById('school');
+    userProfile.school = select.options[select.selectedIndex].value;
+    select = document.getElementById('gender');
+    userProfile.gender = select.options[select.selectedIndex].value;
+    select = document.getElementById('level');
+    userProfile.level = select.options[select.selectedIndex].value;
+    select = document.getElementById('major');
+    userProfile.major = select.options[select.selectedIndex].value;
+    select = document.getElementById('car');
+    userProfile.car = select.options[select.selectedIndex].value;
+    let pData = allPopulationData;
+    if (userProfile.major != "") {
+        pData = pData.concat(majorsData[userProfile.school][userProfile.major]);
+    }
+    populationData = pData.filter((pop) => {
         if (pop.school == undefined) {  // keep all general populations
             return true;
         }
-        return Object.keys(userProfile).every(infoType => {
+        return Object.keys(userProfile).filter(infoType => infoType != "car" && infoType != "major").every(infoType => {
             return pop[infoType] == "all" || pop[infoType] == userProfile[infoType];
         });
     });
+    drawPopulationLines(timeCompSvg, x);
+    recurringData = allRecurringData.filter(recurr => {
+        if (recurr.nonstudent) return false;
+        if (recurr.type == "tuition") {
+            if (recurr.school == "all") {
+                return recurr.level == userProfile.level;
+            } else {
+                return recurr.school == userProfile.school && recurr.level == userProfile.level;
+            }
+        }
+        return true;
+    });
+    updateDots();
+}
+
+
+let tweetPrefix = "https://twitter.com/x/status/"
+
+function changeTweet(next) {
+    currentTweetId = next ? currentTweetId + 1: currentTweetId - 1;
+    let tweetObj = tweets[currentTweetId];
+    d3.select(".twitter-tweet-rendered").remove();
+    d3.select("#tweetContainer").append("blockquote").classed("twitter-tweet", true);
+    d3.select("blockquote").append("a").attr("href", `${tweetPrefix}${tweetObj.tweet_id}`);
+    updateAmount(parseInt(tweetObj.int_amount));
+    twttr.widgets.load(
+        document.getElementById("tweetContainer")
+    );
 }

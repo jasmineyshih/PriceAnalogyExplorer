@@ -5,296 +5,273 @@
             "level": "grad",
             "gender": "all",
             "population": 1262,
-            "population_text": "All Students in School of Medicine"
+            "population_text": "All Students in the School of Medicine"
         },
         {
             "school": "medicine",
             "level": "grad",
             "gender": "male",
             "population": 590,
-            "population_text": "All Male Students in School of Medicine"
+            "population_text": "All Male Students in the School of Medicine"
         },
         {
             "school": "medicine",
             "level": "grad",
             "gender": "female",
             "population": 672,
-            "population_text": "All Female Students in School of Medicine"
-        },{
-            "school": "medicine",
-            "sub": "med",
-            "level": "grad",
-            "gender": "all",
-            "population": 488,
-            "population_text": "All MD Students in School of Medicine"
-        },
-        {
-            "school": "medicine",
-            "sub": "med",
-            "level": "grad",
-            "gender": "male",
-            "population": 248,
-            "population_text": "All Male MD Students"
-        },
-        {
-            "school": "medicine",
-            "sub": "med",
-            "level": "grad",
-            "gender": "female",
-            "population": 240,
-            "population_text": "All Female MD Students"
+            "population_text": "All Female Students in the School of Medicine"
         },
         {
             "school": "law",
             "level": "grad",
             "gender": "all",
             "population": 592,
-            "population_text": "All Students in School of Law"
+            "population_text": "All Students in the School of Law"
         },
         {
             "school": "law",
             "level": "grad",
             "gender": "male",
             "population": 305,
-            "population_text": "All Male Students in School of Law"
+            "population_text": "All Male Students in the School of Law"
         },
         {
             "school": "law",
             "level": "grad",
             "gender": "female",
             "population": 287,
-            "population_text": "All Female Students in School of Law"
+            "population_text": "All Female Students in the School of Law"
         },
         {
             "school": "gsb",
             "level": "grad",
             "gender": "all",
             "population": 952,
-            "population_text": "All Students in Graduate School of Business"
+            "population_text": "All Students in the Gradute School of Business"
         },
         {
             "school": "gsb",
             "level": "grad",
             "gender": "male",
             "population": 509,
-            "population_text": "All Male Students in Graduate School of Business"
+            "population_text": "All Male Students in the Gradute School of Business"
         },
         {
             "school": "gsb",
             "level": "grad",
             "gender": "female",
             "population": 443,
-            "population_text": "All Female Students in Graduate School of Business"
+            "population_text": "All Female Students in the Gradute School of Business"
         },
         {
             "school": "education",
             "level": "grad",
             "gender": "all",
             "population": 277,
-            "population_text": "All Students in School of Education"
+            "population_text": "All Students in the School of Education"
         },
         {
             "school": "education",
             "level": "grad",
             "gender": "male",
             "population": 99,
-            "population_text": "All Male Students in School of Education"
+            "population_text": "All Male Students in the School of Education"
         },
         {
             "school": "education",
             "level": "grad",
             "gender": "female",
             "population": 178,
-            "population_text": "All Female Students in School of Education"
+            "population_text": "All Female Students in the School of Education"
         },
         {
             "school": "engineering",
             "level": "all",
             "gender": "all",
             "population": 4492,
-            "population_text": "All Students in School of Engineering"
+            "population_text": "All Students in the School of Engineering"
         },
         {
             "school": "engineering",
             "level": "all",
             "gender": "male",
             "population": 2831,
-            "population_text": "All Male Students in School of Engineering"
+            "population_text": "All Male Students in the School of Engineering"
         },
         {
             "school": "engineering",
             "level": "all",
             "gender": "female",
             "population": 1661,
-            "population_text": "All Female Students in School of Engineering"
+            "population_text": "All Female Students in the School of Engineering"
         },
         {
             "school": "engineering",
             "level": "grad",
             "gender": "all",
             "population": 3214,
-            "population_text": "All Grad Students in School of Engineering"
+            "population_text": "All Grad Students in the School of Engineering"
         },
         {
             "school": "engineering",
             "level": "grad",
             "gender": "male",
             "population": 2086,
-            "population_text": "All Male Grad Students in School of Engineering"
+            "population_text": "All Male Grad Students in the School of Engineering"
         },
         {
             "school": "engineering",
             "level": "grad",
             "gender": "female",
             "population": 1128,
-            "population_text": "All Female Grad Students in School of Engineering"
+            "population_text": "All Female Grad Students in the School of Engineering"
         },
         {
             "school": "engineering",
             "level": "undergrad",
             "gender": "all",
             "population": 1278,
-            "population_text": "All Undergrad Students in School of Engineering"
+            "population_text": "All Undergrad Students in the School of Engineering"
         },
         {
             "school": "engineering",
             "level": "undergrad",
             "gender": "male",
             "population": 533,
-            "population_text": "All Male Undergrad Students in School of Engineering"
+            "population_text": "All Male Undergrad Students in the School of Engineering"
         },
         {
             "school": "engineering",
             "level": "undergrad",
             "gender": "female",
             "population": 745,
-            "population_text": "All Female Undergrad Students in School of Engineering"
+            "population_text": "All Female Undergrad Students in the School of Engineering"
         },
         {
             "school": "earth",
             "level": "all",
             "gender": "all",
             "population": 508,
-            "population_text": "All Students in School of EEES"
+            "population_text": "All Students in the School of EEES"
         },
         {
             "school": "earth",
             "level": "all",
             "gender": "male",
             "population": 237,
-            "population_text": "All Male Students in School of EEES"
+            "population_text": "All Male Students in the School of EEES"
         },
         {
             "school": "earth",
             "level": "all",
             "gender": "female",
             "population": 271,
-            "population_text": "All Female Students in School of EEES"
+            "population_text": "All Female Students in the School of EEES"
         },
         {
             "school": "earth",
             "level": "grad",
             "gender": "all",
             "population": 415,
-            "population_text": "All Grad Students in School of EEES"
+            "population_text": "All Grad Students in the School of EEES"
         },
         {
             "school": "earth",
             "level": "grad",
             "gender": "male",
             "population": 206,
-            "population_text": "All Male Grad Students in School of EEES"
+            "population_text": "All Male Grad Students in the School of EEES"
         },
         {
             "school": "earth",
             "level": "grad",
             "gender": "female",
             "population": 206,
-            "population_text": "All Female Grad Students in School of EEES"
+            "population_text": "All Female Grad Students in the School of EEES"
         },
         {
             "school": "earth",
             "level": "undergrad",
             "gender": "all",
             "population": 93,
-            "population_text": "All Undergrad Students in School of EEES"
+            "population_text": "All Undergrad Students in the School of EEES"
         },
         {
             "school": "earth",
             "level": "undergrad",
             "gender": "male",
             "population": 31,
-            "population_text": "All Male Undergrad Students in School of EEES"
+            "population_text": "All Male Undergrad Students in the School of EEES"
         },
         {
             "school": "earth",
             "level": "undergrad",
             "gender": "female",
             "population": 62,
-            "population_text": "All Female Undergrad Students in School of EEES"
+            "population_text": "All Female Undergrad Students in the School of EEES"
         },
         {
             "school": "humanities&sciences",
             "level": "all",
             "gender": "all",
             "population": 4175,
-            "population_text": "All Students in School of Humanities & Sciences"
+            "population_text": "All Students in the School of Humanities & Sciences"
         },
         {
             "school": "humanities&sciences",
             "level": "all",
             "gender": "male",
             "population": 2105,
-            "population_text": "All Male Students in School of Humanities & Sciences"
+            "population_text": "All Male Students in the School of Humanities & Sciences"
         },
         {
             "school": "humanities&sciences",
             "level": "all",
             "gender": "female",
             "population": 2070,
-            "population_text": "All Female Students in School of Humanities & Sciences"
+            "population_text": "All Female Students in the School of Humanities & Sciences"
         },
         {
             "school": "humanities&sciences",
             "level": "grad",
             "gender": "all",
             "population": 2307,
-            "population_text": "All Grad Students in School of Humanities & Sciences"
+            "population_text": "All Grad Students in the School of Humanities & Sciences"
         },
         {
             "school": "humanities&sciences",
             "level": "grad",
             "gender": "male",
             "population": 1297,
-            "population_text": "All Male Grad Students in School of Humanities & Sciences"
+            "population_text": "All Male Grad Students in the School of Humanities & Sciences"
         },
         {
             "school": "humanities&sciences",
             "level": "grad",
             "gender": "female",
             "population": 1010,
-            "population_text": "All Female Grad Students in School of Humanities & Sciences"
+            "population_text": "All Female Grad Students in the School of Humanities & Sciences"
         },
         {
             "school": "humanities&sciences",
             "level": "undergrad",
             "gender": "all",
             "population": 1868,
-            "population_text": "All Undergrad Students in School of Humanities & Sciences"
+            "population_text": "All Undergrad Students in the School of Humanities & Sciences"
         },
         {
             "school": "humanities&sciences",
             "level": "undergrad",
             "gender": "male",
             "population": 808,
-            "population_text": "All Male Undergrad Students in School of Humanities & Sciences"
+            "population_text": "All Male Undergrad Students in the School of Humanities & Sciences"
         },
         {
             "school": "humanities&sciences",
             "level": "undergrad",
             "gender": "female",
             "population": 1060,
-            "population_text": "All Female Undergrad Students in School of Humanities & Sciences"
+            "population_text": "All Female Undergrad Students in the School of Humanities & Sciences"
         },
         {
             "school": "all",
@@ -347,23 +324,223 @@
         },
         {
             "population": 68572,
-            "population_text": "The City of Palo Alto"
+            "population_text": "The Palo Alto City Population"
         },
         {
             "population": 1936259,
-            "population_text": "The County of Santa Clara"
+            "population_text": "The Santa Clara County Population"
         },
         {
             "population": 874961,
-            "population_text": "The City of San Francisco"
+            "population_text": "The San Francisco City Population"
         },
         {
             "population": 9710000,
-            "population_text": "The Entire Bay Area"
+            "population_text": "The Entire Bay Area Population"
         },
         {
             "population": 39538223,
-            "population_text": "The State of California"
+            "population_text": "The State of California Population"
+        }
+    ],
+    "majors": {
+        "engineering": {
+            "cs": [
+                {
+                    "school": "engineering",
+                    "level": "all",
+                    "gender": "all",
+                    "major": "cs",
+                    "population": 1345,
+                    "population_text": "All Computer Science Students"
+                },
+                {
+                    "school": "engineering",
+                    "level": "all",
+                    "gender": "male",
+                    "major": "cs",
+                    "population": 911,
+                    "population_text": "All Male Computer Science Students"
+                },
+                {
+                    "school": "engineering",
+                    "level": "all",
+                    "gender": "female",
+                    "major": "cs",
+                    "population": 434,
+                    "population_text": "All Female Computer Science Students"
+                },
+                {
+                    "school": "engineering",
+                    "level": "grad",
+                    "gender": "all",
+                    "major": "cs",
+                    "population": 723,
+                    "population_text": "All Computer Science Grad Students"
+                },
+                {
+                    "school": "engineering",
+                    "level": "grad",
+                    "gender": "male",
+                    "major": "cs",
+                    "population": 504,
+                    "population_text": "All Male Computer Science Grad Students"
+                },
+                {
+                    "school": "engineering",
+                    "level": "grad",
+                    "gender": "female",
+                    "major": "cs",
+                    "population": 219,
+                    "population_text": "All Female Computer Science Grad Students"
+                },
+                {
+                    "school": "engineering",
+                    "level": "undergrad",
+                    "gender": "all",
+                    "major": "cs",
+                    "population": 622,
+                    "population_text": "All Computer Science Undergrad Students"
+                },
+                {
+                    "school": "engineering",
+                    "level": "undergrad",
+                    "gender": "male",
+                    "major": "cs",
+                    "population": 407,
+                    "population_text": "All Male Computer Science Undergrad Students"
+                },
+                {
+                    "school": "engineering",
+                    "level": "undergrad",
+                    "gender": "female",
+                    "major": "cs",
+                    "population": 215,
+                    "population_text": "All Female Computer Science Undergrad Students"
+                }
+            ]
+        },
+        "medicine": {
+            "medicine" : [
+                {
+                    "school": "medicine",
+                    "level": "grad",
+                    "major": "medicine",
+                    "gender": "all",
+                    "population": 488,
+                    "population_text": "All MD Students in the School of Medicine"
+                },
+                {
+                    "school": "medicine",
+                    "level": "grad",
+                    "major": "medicine",
+                    "gender": "male",
+                    "population": 248,
+                    "population_text": "All Male MD Students"
+                },
+                {
+                    "school": "medicine",
+                    "level": "grad",
+                    "major": "medicine",
+                    "gender": "female",
+                    "population": 240,
+                    "population_text": "All Female MD Students"
+                }
+            ]
+        },
+        "humanities&sciences": {
+            "appliedPhysics": [
+                {
+                    "school": "humanities&sciences",
+                    "level": "grad",
+                    "major": "appliedPhysics",
+                    "gender": "all",
+                    "population": 153,
+                    "population_text": "All Applied Physics Students"
+                },
+                {
+                    "school": "humanities&sciences",
+                    "level": "grad",
+                    "major": "appliedPhysics",
+                    "gender": "male",
+                    "population": 104,
+                    "population_text": "All Male Applied Physics Students"
+                },
+                {
+                    "school": "humanities&sciences",
+                    "level": "grad",
+                    "major": "appliedPhysics",
+                    "gender": "female",
+                    "population": 49,
+                    "population_text": "All Female Applied Physics Students"
+                }
+            ]
+        }
+    },
+    "recurring": [
+        {
+            "studentonly": true,
+            "level": "undergrad",
+            "cost_name": "Food Costs",
+            "cost": 2231,
+            "time_unit": 2.3,
+            "max_time": 48
+        },
+        {
+            "studentonly": true,
+            "level": "undergrad",
+            "cost_name": "Housing Costs",
+            "cost": 3722,
+            "time_unit": 2.3,
+            "max_time": 48
+        },
+        {
+            "studentonly": true,
+            "level": "grad",
+            "cost_name": "Food Costs",
+            "cost": 320,
+            "time_unit": 1
+        },
+        {
+            "studentonly": true,
+            "level": "grad",
+            "cost_name": "Housing Costs",
+            "cost": 5530,
+            "time_unit": 2.3,
+            "max_time": 24
+        },
+        {
+            "cost_name": "Phone Bill",
+            "cost": 114,
+            "time_unit": 1
+        },
+        {
+            "cost_name": "Netflix Subscription",
+            "cost": 10,
+            "time_unit": 1
+        },
+        {
+            "cost_name": "Amazon Prime Subscription",
+            "cost": 15,
+            "time_unit": 1
+        },
+        {
+            "nonstudent": true,
+            "cost_name": "Gym Membership",
+            "cost": 142,
+            "time_unit": 1
+        },
+        {
+            "nonstudent": true,
+            "cost_name": "1 Bedroom Rent",
+            "cost": 1975,
+            "time_unit": 1
+        },
+        {
+            "nonstudent": true,
+            "cost_name": "Food Costs",
+            "cost": 320,
+            "time_unit": 1
         }
     ],
     "onetime": [
@@ -424,6 +601,13 @@
             "cost": 221892
         },
         {
+            "type": "fees",
+            "school": "all",
+            "level": "all",
+            "name": "a year of Cardinal Care",
+            "cost": 6192
+        },
+        {
             "type": "transportation",
             "name": "a Toyota Corolla",
             "cost": 22000
@@ -449,23 +633,18 @@
             "cost": 400
         },
         {
-            "type": "transportation",
-            "name": "an Average Boat",
-            "cost": 60000
-        },
-        {
             "type": "entertainment",
             "name": "a Superbowl Ticket",
             "cost": 9496
         },
         {
             "type": "entertainment",
-            "name": "an average wedding in California",
-            "cost": 25000
+            "name": "a Nintendo Switch",
+            "cost": 300
         },
         {
             "type": "entertainment",
-            "name": "a 1-day 1-park ticket for Disneyland (tier 1)",
+            "name": "a 1-day ticket to Disneyland",
             "cost": 104
         },
         {
@@ -479,11 +658,6 @@
             "cost": 4371
         },
         {
-            "type": "entertainment",
-            "name": "a month of gym membership",
-            "cost": 142
-        },
-        {
             "type": "food",
             "name": "a Cup of Coffee",
             "cost": 2.7
@@ -494,9 +668,136 @@
             "cost": 1.29
         },
         {
-            "type": "food",
-            "name": "a gallon of milk",
-            "cost": 3.77
+            "type": "property",
+            "name": "a 2-Bedroom Condo in South Florida",
+            "cost": 100000
+        },
+        {
+            "type": "property",
+            "name": "an Average House in the Bay Area",
+            "cost": 1300000
+        }
+    ],
+    "tweets": [
+        {
+            "tweet_id": "1487481943038074882",
+            "currency_amount": "$1,800,000.00",
+            "int_amount": "1800000",
+            "text": "POC-Founded Fintech Raises $1.8 Million In VC To Help The Food Truck Industry https://trib.al/jX3NqFg"
+        },
+        {
+            "tweet_id": "703208134538502146",
+            "currency_amount": "$10,000,000.00",
+            "int_amount": "10000000",
+            "text": "This $10 million supercomputer promises higher returns for Wall Street: http://bloom.bg/1R6WbAw"
+        },
+        {
+            "tweet_id": "1487534785639718915",
+            "currency_amount": "$14,750,000.00",
+            "int_amount": "14750000",
+            "text": "$14.75-Million Waterfront Villa On The Bahamas\u2019 Paradise Island Epitomizes Tropical Living https://trib.al/gTZPCMS"
+        },
+        {
+            "tweet_id": "601469925899804672",
+            "currency_amount": "$67,000,000.00",
+            "int_amount": "67000000",
+            "text": "Apartments at $67 Million set to test Hong Kong luxury market:"
+        },
+        {
+            "tweet_id": "1301526620847697922",
+            "currency_amount": "$100,000,000.00",
+            "int_amount": "100000000",
+            "text": "The $100 million gift to historically Black medical schools will ease the debt burden of their students. More Black doctors will mean more Black lives saved in America."
+        },
+        {
+            "tweet_id": "956247084855898112",
+            "currency_amount": "$100,000,000.00",
+            "int_amount": "100000000",
+            "text": "FX traders do $100 million deals on mobile as market transforms: https://bloom.bg/2BsJ7F6"
+        },
+        {
+            "tweet_id": "1458116176165412867",
+            "currency_amount": "$1,000,000,000.00",
+            "int_amount": "1000000000",
+            "text": "Element Capital hit with $1bn loss in bond market shake-up"
+        },
+        {
+            "tweet_id": "957059909228617730",
+            "currency_amount": "$1,700,000,000.00",
+            "int_amount": "1700000000",
+            "text": "Wall Street has a $1.7 billion bet on the rising risk of grid attacks: https://bloom.bg/2EbWr3q"
+        },
+        {
+            "tweet_id": "899904006624952320",
+            "currency_amount": "$187,000,000,000.00",
+            "int_amount": "187000000000",
+            "text": "Eliminating gender gaps at work could add 150 billion pounds ($187 billion) to U.K.\u2019s annual GDP by 2025."
+        },
+        {
+            "tweet_id": "1458389630059941889",
+            "currency_amount": "$3,215,892,000.00",
+            "int_amount": "3215892000",
+            "text": "Google loses appeal against \u20ac2.4bn shopping fine"
+        },
+        {
+            "tweet_id": "1145678471429001217",
+            "currency_amount": "$16,400,000,000.00",
+            "int_amount": "16400000000",
+            "text": "Sales of debt globally for sustainability projects have more than doubled this year to $16.4 billion, and Korea makes up about 16% of that total. https://bloom.bg/2RMPufU"
+        },
+        {
+            "tweet_id": "1341431746907283460",
+            "currency_amount": "$27,000,000,000.00",
+            "int_amount": "27000000000",
+            "text": "In 2020, we've seen a record $27B flow into ESG-related equity ETFs in the US, but it can be difficult to discern a quality sustainable investment from a greenwashed one. This research seeks to bring clarity and discipline to the discussion."
+        },
+        {
+            "tweet_id": "1133742309944778752",
+            "currency_amount": "$30,500,000,000.00",
+            "int_amount": "30500000000",
+            "text": "Total spending on financial market data, analysis and news rose 7% to a record $30.5 billion in 2018 - the fastest growth since 2008. https://bloom.bg/2wuTI1S"
+        },
+        {
+            "tweet_id": "1447919863255773184",
+            "currency_amount": "$32,158,920,000.00",
+            "int_amount": "32158920000",
+            "text": "Black, Asian, and other ethnic groups across the labor market are estimated to bring \u00a324 billion in annual economic benefits to the UK economy. While we've seen progress, there's still work to be done to bridge the Black wealth gap. Learn more: https://bloom.bg/3oUw1MZ"
+        },
+        {
+            "tweet_id": "979138614645927936",
+            "currency_amount": "$63,700,000,000.00",
+            "int_amount": "63700000000",
+            "text": "Global art sales reached $63.7 billion in 2017, with China as the second largest marketplace following the U.S. at 21%."
+        },
+        {
+            "tweet_id": "801426701439758336",
+            "currency_amount": "$100,000,000,000.00",
+            "int_amount": "100000000000",
+            "text": "$100 Billion Chinese-made city near Singapore \u2018scares everybody\u2019: http://bloom.bg/2g3dzvV"
+        },
+        {
+            "tweet_id": "1236335805544779779",
+            "currency_amount": "$282,200,000,000.00",
+            "int_amount": "282200000000",
+            "text": "Global money flowing into the renewable energy industry totaled $282.2 billion last year, up 1% from 2018"
+        },
+        {
+            "tweet_id": "1366770302471073801",
+            "currency_amount": "$732,000,000,000.00",
+            "int_amount": "732000000000",
+            "text": "Despite the pandemic, sustainable debt hit another record in 2020, with $732 billion issued."
+        },
+        {
+            "tweet_id": "889477021021097984",
+            "currency_amount": "$23,000,000,000,000.00",
+            "int_amount": "23000000000000",
+            "text": "Global sustainable investments grew by a quarter to $23 trillion over the last two years: https://bloom.bg/2ttQwRe"
+        },
+        {
+            "tweet_id": "1364259677442363398",
+            "currency_amount": "$140,500,000,000,000.00",
+            "int_amount": "140500000000000",
+            "text": "This represents more than a third of the $140.5 trillion in projected total assets under management."
         }
     ]
 }

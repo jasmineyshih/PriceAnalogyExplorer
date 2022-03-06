@@ -40,15 +40,16 @@
         }
         #timeCompTooltip {
             padding: 5px 8px;
-            opacity: 0;
+            display: none;
             position: absolute;
             font-size: 12px;
-            width: 100px;
+            width: 120px;
             border: 2px solid black;
             border-radius: 5px;
             background: rgb(255,215,215);
             background: linear-gradient(0deg, rgba(255,215,215,1) 0%, rgba(255,217,172,1) 100%);
             font-weight: 500;
+            z-index: 100;
         }
         #costTooltip {
             padding: 5px 8px;
@@ -61,7 +62,10 @@
             background: white;
             font-weight: 500;
         }
-        #analogyPop {
+        .highlightedAnalogy {
+            border: 2px solid black;
+        }
+        .analogyPop, .analogyPopOnetime {
             text-decoration: underline;
             cursor: default;
         }
@@ -76,25 +80,27 @@
             border-bottom: 6px solid black;
             margin-left: 5px;
         }
-        #popTip {
+        .popTip {
             position: absolute;
             left: 10px;
             top: 85%;
             opacity: 0;
+            z-index: 100;
         }
-        #popNumber {
+        .popNumber {
             background: white;
             border: 2px solid black;
             border-radius: 5px;
             width: fit-content;
             padding: 5px;
         }
-        #analogySentenceContainer {
+        .analogySentenceContainer {
             position: relative;
             padding: 10px;
             border-radius: 10px;
             background: rgb(255,215,215);
             background: linear-gradient(0deg, rgba(255,215,215,1) 0%, rgba(255,217,172,1) 100%);
+            margin: 10px 0;
         }
         .sidebarSections {
             margin-bottom: 20px;
@@ -103,18 +109,32 @@
             margin-bottom: 5px;
         }
         #sidebar {
-            padding: 10px
+            padding: 0 10px;
         }
         #switchButton {
-            font-size: 12px;
-            opacity: 0.9;
+        }
+        #tweetComponent {
+            min-width: 60%;
+            padding: 0 20px;
+        }
+        .twitter-tweet-rendered {
+            max-width: 500px !important;
         }
 
     </style>
 
     <body>
         <div id="toolContainer" style="display: flex">
-            <div id="vizContainer">
+            <div id="tweetComponent">
+                <div id="tweetContainer">
+                    <button onclick="changeTweet(0)">Previous Tweet</button>
+                    <button onclick="changeTweet(1)">Next Tweet</button>
+                    <blockquote class="twitter-tweet">
+                        <a href="https://twitter.com/x/status/1487481943038074882"></a> 
+                    </blockquote>
+                </div>
+            </div>
+            <div style="display: none;" id="vizContainer">
                 <div id="timeCompTooltip"></div>
                 <div id="costTooltip"></div>
                 <div id="viz"></div>
@@ -122,10 +142,58 @@
             </div>
             <div id="sidebar">
                 <div class="sidebarSections">
-                    <button id="switchButton" onclick="switchAnalogyType()">Switch to <span id="switchButtonText">One-time Cost Analogy</span></button>
+                    <button id="switchButton" onclick="switchDisplayType()">Switch to <span id="switchButtonText">Visualization View</span></button>
                 </div>
                 <div id="inputContainer" class="sidebarSections">
+                    <div>Please enter your information</h4>
                     <div class="inputWrapper">
+                        <label for="gender">Gender:</label>
+                        <select name="gender" id="gender">
+                            <option hidden disabled selected value></option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <div class="inputWrapper">
+                        <label for="school">School:</label>
+                        <select name="school" id="school">
+                            <option hidden disabled selected value></option>
+                            <option value="gsb">Business</option>
+                            <option value="earth">Earth, Energy, and Environmental Sciences</option>
+                            <option value="education">Education</option>
+                            <option value="engineering">Engineering</option>
+                            <option value="humanities&sciences">Humanities & Sciences</option>
+                            <option value="law">Law</option>
+                            <option value="medicine">Medicine</option>
+                        </select>
+                    </div>
+                    <div class="inputWrapper">
+                        <label for="level">Degree:</label>
+                        <select name="level" id="level">
+                            <option hidden disabled selected value></option>
+                            <option value="undergrad">Undergraduate</option>
+                            <option value="grad">Graduate</option>
+                        </select>
+                    </div>
+                    <div class="inputWrapper">
+                        <label for="major">Major:</label>
+                        <select name="major" id="major">
+                            <option value=""></option>
+                            <option value="cs">Computer Science</option>
+                            <option value="medicine">Medicine</option>
+                            <option value="appliedPhysics">Applied Physics</option>
+                        </select>
+                    </div>
+                    <div class="inputWrapper">
+                        <label for="car">Do you own a car?</label>
+                        <select name="car" id="car">
+                            <option hidden disabled selected value></option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <button onclick="filterPopulationByProfile()">Submit</button>
+                    <!--<div class="inputWrapper">
                         <label for="amount">Enter Amount:</label>
                         <input type="text" id="amountField" name="amount" value="1000000">
                     </div>
@@ -137,16 +205,48 @@
                         <div>Show One-time Cost Categories:</div>
                         <div id="categoryFiltersContainer"></div>
                     </div>
-                    <button onclick="updateAmount()">Find Analogy</button>
+                    <button onclick="updateAmount()">Find Analogy</button>-->
                 </div>
                 <div id="analogiesContainer" class="sidebarSections">
-                    <div style="margin-bottom: 5px">Closest Analogy</div>
-                    <div id="analogySentenceContainer">
-                        <div id="analogySentence">$<span id="analogyAmount" class="analogyComponents">N</span> is roughly equivalent to the population of <span id="analogyPop" class="analogyComponents">Y</span> paying $<span id="monthlyCostAmount" class="analogyComponents">M</span> for <span id="analogyTime" class="analogyComponents">X</span></div>
-                        <div id="analogySentenceOnetime">$<span id="analogyAmountOnetime" class="analogyComponents">N</span> is roughly equivalent to everyone in the population of <span id="analogyPopOnetime" class="analogyComponents">Y</span> getting <span id="analogyCostType" class="analogyComponents">C</span></div>
-                        <div id="popTip">
+                    <div style="margin-bottom: 5px">Best 5 Analogies for $<span id="analogyAmount"></span></div>
+                    <div id="analogy0" class="analogySentenceContainer">
+                        <div class="analogySentence"><span class="analogyTime analogyComponents">X</span> of <span class="monthlyCostAmount analogyComponents">M</span> for <span id="analogyPop0" class="analogyPop analogyComponents">Y</span></div>
+                        <div class="analogySentenceOnetime"><span id="analogyPopOnetime0" class="analogyPopOnetime analogyComponents">Y</span> get <span class="analogyCostType analogyComponents">C</span></div>
+                        <div class="popTip">
                             <div class="arrowUp"></div>
-                            <div id="popNumber">Y</div>
+                            <div class="popNumber">Y</div>
+                        </div>
+                    </div>
+                    <div id="analogy1" class="analogySentenceContainer">
+                        <div class="analogySentence"><span class="analogyTime analogyComponents">X</span> of <span class="monthlyCostAmount analogyComponents">M</span> for <span id="analogyPop1" class="analogyPop analogyComponents">Y</span></div>
+                        <div class="analogySentenceOnetime"><span id="analogyPopOnetime1" class="analogyPopOnetime analogyComponents">Y</span> get <span class="analogyCostType analogyComponents">C</span></div>
+                        <div class="popTip">
+                            <div class="arrowUp"></div>
+                            <div class="popNumber">Y</div>
+                        </div>
+                    </div>
+                    <div id="analogy2" class="analogySentenceContainer">
+                        <div class="analogySentence"><span class="analogyTime analogyComponents">X</span> of <span class="monthlyCostAmount analogyComponents">M</span> for <span id="analogyPop2" class="analogyPop analogyComponents">Y</span></div>
+                        <div class="analogySentenceOnetime"><span id="analogyPopOnetime2" class="analogyPopOnetime analogyComponents">Y</span> get <span class="analogyCostType analogyComponents">C</span></div>
+                        <div class="popTip">
+                            <div class="arrowUp"></div>
+                            <div class="popNumber">Y</div>
+                        </div>
+                    </div>
+                    <div id="analogy3" class="analogySentenceContainer">
+                        <div class="analogySentence"><span class="analogyTime analogyComponents">X</span> of <span class="monthlyCostAmount analogyComponents">M</span> for <span id="analogyPop3" class="analogyPop analogyComponents">Y</span></div>
+                        <div class="analogySentenceOnetime"><span id="analogyPopOnetime3" class="analogyPopOnetime analogyComponents">Y</span> get <span class="analogyCostType analogyComponents">C</span></div>
+                        <div class="popTip">
+                            <div class="arrowUp"></div>
+                            <div class="popNumber">Y</div>
+                        </div>
+                    </div>
+                    <div id="analogy4" class="analogySentenceContainer">
+                        <div class="analogySentence"><span class="analogyTime analogyComponents">X</span> of <span class="monthlyCostAmount analogyComponents">M</span> for <span id="analogyPop4" class="analogyPop analogyComponents">Y</span></div>
+                        <div class="analogySentenceOnetime"><span id="analogyPopOnetime4" class="analogyPopOnetime analogyComponents">Y</span> get <span class="analogyCostType analogyComponents">C</span></div>
+                        <div class="popTip">
+                            <div class="arrowUp"></div>
+                            <div class="popNumber">Y</div>
                         </div>
                     </div>
                 </div>
@@ -155,22 +255,29 @@
         
         
     </body>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
     <script>
         let userProfile = {
-            "school": "medicine",
-            "level": "grad",
-            "gender": "female"
+            "school": "",
+            "level": "",
+            "major": "",
+            "gender": "",
+            "car": ""
         };
         let currAnalogyType = 0;
-        let amount = 1000000;
+        let amount = 0;
         let monthlyCostInput = 320;
         let allPopulationData;
         let populationData;
+        let allRecurringData;
+        let recurringData;
         let onetimeData;
+        let majorsData;
         let maxOnetimeAmount = 1000000000000;
         let dotsArray = [];
         let onetimeCostDotsArray = [];  // onetime cost dots in time component graph
         let monthArray = [];
+        let months = [];
         let onetimeDotsArray;
         let excludedCategories = new Set();
         let monthToStringMap = {};
@@ -184,16 +291,34 @@
         let currAnalogyDot = null;
         let currOnetimeAnalogyDot = null;
         let currOnetimeCostAnalogyDot = null;
-        let currBestAnalogy = null;
+        let currBestAnalogies = [];
         let timeCompTooltip = d3.select("#timeCompTooltip");
         let analogyBank = [];
 
-        d3.select("#analogyPop")
+        let tweets = {};
+        let currentTweetId = 0;
+
+        d3.selectAll(".analogyPop")
             .on("mouseover", function () {
-                d3.select("#popTip").style("opacity", 1);
+                let index = d3.select(this).attr("id");
+                index = index[index.length-1];
+                d3.select(`#analogy${index}`).select(".popTip").style("opacity", 1);
             })
             .on("mouseleave", function () {
-                d3.select("#popTip").style("opacity", 0);
+                let index = d3.select(this).attr("id");
+                index = index[index.length-1];
+                d3.select(`#analogy${index}`).select(".popTip").style("opacity", 0);
+            });
+        d3.selectAll(".analogyPopOnetime")
+            .on("mouseover", function () {
+                let index = d3.select(this).attr("id");
+                index = index[index.length-1];
+                d3.select(`#analogy${index}`).select(".popTip").style("opacity", 1);
+            })
+            .on("mouseleave", function () {
+                let index = d3.select(this).attr("id");
+                index = index[index.length-1];
+                d3.select(`#analogy${index}`).select(".popTip").style("opacity", 0);
             });
 
         let minPopulation, maxPopulation;
@@ -222,15 +347,26 @@
 
         d3.json("data/population_and_costs.json").then(function (data) {
             allPopulationData = data.population;
-            filterPopulationByProfile();
+            for (let i = 0; i < allPopulationData.length; i ++) {
+                allPopulationData[i].id = i;
+            }
+            populationData = allPopulationData.filter((pop) => {
+                return pop.school == undefined || pop.population_text == "All Stanford Students";
+            });
+            allRecurringData = data.recurring;
+            recurringData = allRecurringData.filter((recurr) => {
+                return !recurr.studentonly;
+            });
+            majorsData = data.majors;
             onetimeData = data.onetime;
-            minPopulation = d3.min(populationData.map(dat => dat.population));
-            maxPopulation = d3.max(populationData.map(dat => dat.population));
+            minPopulation = d3.min(allPopulationData.map(dat => dat.population));
+            maxPopulation = d3.max(allPopulationData.map(dat => dat.population));
             populationData.sort((a, b) => a.population - b.population);
 
-            for (let i = 0; i < populationData.length; i ++) {
-                populationData[i].id = i;
+            for (let i = 0; i < data.tweets.length; i ++) {
+                tweets[i] = data.tweets[i];
             }
+            amount = parseInt(tweets[0].int_amount);
             // one-time cost chart
             onetimeData.sort((a, b) => a.cost - b.cost);
             for (let i = 0; i < onetimeData.length; i ++) {
