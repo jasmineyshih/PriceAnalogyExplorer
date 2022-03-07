@@ -231,7 +231,7 @@ function updateDots() {
                                     //population_multiplier: parseFloat((amount / d.cost / month / d.population).toFixed(2)),
                                     id: d.id
                                 }
-                                entry.multiplier = entry.amountTo / amount;
+                                entry.diff = Math.abs(entry.amountTo - amount) / amount;
                                 dotsArray.push(entry);
                             }
                         }
@@ -426,11 +426,12 @@ let hideOnetimeCostTooltip = function () {
 };
 
 function findClosestAnalogy () {
-    analogyBank = dotsArray.map(ana => {
+    analogyBank = [];
+    dotsArray.forEach(ana => {
         let obj = JSON.parse(JSON.stringify(ana));
-        obj.diff = Math.abs(obj.multiplier - 1);
+        //obj.diff = Math.abs(obj.multiplier - 1);
         obj.analogyType = "recurring";
-        return obj;
+        analogyBank.push(obj);
     });
     onetimeCostDotsArray.forEach(dot => {
         let obj = JSON.parse(JSON.stringify(dot));
@@ -443,7 +444,7 @@ function findClosestAnalogy () {
                 closestPopDot = pop;
             }
         });
-        obj.diff = Math.abs((obj.cost * closestPopDot.population / amount) - 1);
+        obj.diff = Math.abs((obj.cost * closestPopDot.population) - amount) / amount;//Math.abs((obj.cost * closestPopDot.population / amount) - 1);
         obj.popId = closestPopDot.id;
         obj.populationObj = closestPopDot;
         obj.population_text = closestPopDot.population_text;
@@ -461,6 +462,28 @@ function findClosestAnalogy () {
         if (popDiff != 0) return popDiff;
         return a.diff - b.diff;
     });
+    let checkForDup = true;
+    while (checkForDup) {
+        let removedDup = false;
+        for (let i = 0; i < 5; i++) {
+            for (let j = 0; j < 5; j++) {
+                if (i != j) {
+                    if (analogyBank[i].analogyType == analogyBank[j].analogyType && analogyBank[j].analogyType == "recurring") {
+                        if ((analogyBank[i].costName == analogyBank[j].costName && analogyBank[i].population == analogyBank[j].population)
+                            || (analogyBank[i].costName == analogyBank[j].costName && analogyBank[i].time == analogyBank[j].time)
+                            || (analogyBank[i].population == analogyBank[j].population && analogyBank[i].time == analogyBank[j].time)) {
+                                analogyBank.splice(j, 1);   // remove the later one
+                                removedDup = true;
+                                break;
+                        }
+                    }
+                }
+            }
+            if (removedDup)
+                break;
+        }
+        checkForDup = removedDup;
+    }
     analogyBank.forEach((a, ind) => {
         a.isTop5 = ind < 5 ? true : false;
         a.rank = ind;
@@ -482,20 +505,42 @@ function applyEnergyFunction(analogies) {
         }
         // population
         let populationScore = 0;
-        if (analogy.populationObj.major == userProfile.major) {
-            if (analogy.populationObj.level == userProfile.level && analogy.populationObj.gender == userProfile.gender) {
-                populationScore = 0;
-            } else if (analogy.populationObj.level == userProfile.level) {
-                populationScore = 0.5;
-            } else {
-                populationScore = 1;
+        if (analogy.populationObj.school == userProfile.school) {
+            if (userProfile.major != "" && analogy.populationObj.major == userProfile.major) {
+                if (analogy.populationObj.level == userProfile.level) {
+                    if (userProfile.gender == "male") {
+                        populationScore = 0;    // same school, major, degree for male
+                    } else {
+                        if (analogy.populationObj.gender == userProfile.gender) {
+                            populationScore = 0;    // same school, major, degree, and gender for female
+                        } else {
+                            populationScore = 0.5;  // same school, major, degree for female
+                        }
+                    }
+                } else {
+                    populationScore = 1;    // same school and major
+                }
+            } else if (userProfile.major != "") {
+                populationScore = 2;    // same school
+            } else {    // major not specified
+                if (analogy.populationObj.level == userProfile.level) {
+                    if (analogy.populationObj.gender == "male") {
+                        populationScore = 0;    // same school, major, degree for male
+                    } else {
+                        if (analogy.populationObj.gender == userProfile.gender) {
+                            populationScore = 0;    // same school, major, degree, and gender for female
+                        } else {
+                            populationScore = 0.5;  // same school, major, degree for female
+                        }
+                    }
+                } else {
+                    populationScore = 1;    // same school
+                }
             }
         } else {
-            if (["All Stanford Students", "The State of California Population"].includes(analogy.populationObj.population_text)) {
-                populationScore = 1;
-            } else if (analogy.populationObj.school == userProfile.school) {
+            if (["All Stanford Students", "The State of California Population", "The U.S. Population"].includes(analogy.populationObj.population_text)) {
                 populationScore = 2;
-            } else if (analogy.populationObj.school != undefined) {
+            } else if (analogy.populationObj.school == "all") {
                 populationScore = 3;
             } else {
                 populationScore = 4;
@@ -522,15 +567,24 @@ function applyEnergyFunction(analogies) {
             }
         } else {    // car owners less aware of car prices
             if (["a Toyota Corolla", "a Toyota Prius", "a Tesla Model 3"].includes(analogy.name)) {
-                carScore = 2;
+                carScore = 1;
             }
         }
+        // analogy type
+        let relevanceScore = 0;
+        if (userProfile.level == "undergrad" && ["a $100k Fellowship","a $500k Research Grant"].includes(analogy.name)) {
+            relevanceScore = 3;
+        }
+        if (analogy.name == "a year of Cardinal Care") {
+            relevanceScore = -1;
+        }
         analogy.score = {
-            total: accuracyScore + populationScore + timeScore + carScore,
+            total: accuracyScore + populationScore + timeScore + carScore + relevanceScore,
             accuracyScore: accuracyScore,
             populationScore: populationScore,
             timeScore: timeScore,
-            carScore: carScore
+            carScore: carScore,
+            relevanceScore: relevanceScore
         };
     });
 }
@@ -658,10 +712,13 @@ function filterPopulationByProfile() {
         if (pop.school == undefined) {  // keep all general populations
             return true;
         }
-        return Object.keys(userProfile).filter(infoType => infoType != "car" && infoType != "major").every(infoType => {
+        return Object.keys(userProfile).filter(infoType => infoType != "car" && infoType != "major" && infoType != "gender").every(infoType => {
             return pop[infoType] == "all" || pop[infoType] == userProfile[infoType];
         });
     });
+    if (userProfile.gender == "male") {
+        populationData = populationData.filter(pop => pop.gender != "female");
+    }
     drawPopulationLines(timeCompSvg, x);
     recurringData = allRecurringData.filter(recurr => {
         if (recurr.nonstudent) return false;
@@ -679,15 +736,60 @@ function filterPopulationByProfile() {
 
 
 let tweetPrefix = "https://twitter.com/x/status/"
-
-function changeTweet(next) {
-    currentTweetId = next ? currentTweetId + 1: currentTweetId - 1;
-    let tweetObj = tweets[currentTweetId];
-    d3.select(".twitter-tweet-rendered").remove();
-    d3.select("#tweetContainer").append("blockquote").classed("twitter-tweet", true);
-    d3.select("blockquote").append("a").attr("href", `${tweetPrefix}${tweetObj.tweet_id}`);
-    updateAmount(parseInt(tweetObj.int_amount));
+function loadTweets() {
+    tweets.forEach((tweet) => {
+        d3.select("#allTweetsContainer")
+            .append("div")
+            .classed("singleTweet", true)
+            .attr("id", `st${tweet.tweet_id}`);
+        d3.select(`#st${tweet.tweet_id}`)
+            .append("blockquote")
+            .attr("id", `t${tweet.tweet_id}`)
+            .classed("twitter-tweet", true);
+        d3.select(`#t${tweet.tweet_id}`)
+            .append("a")
+            .attr("href", `${tweetPrefix}${tweet.tweet_id}`);
+        tweet.other_tweets.forEach((example, ind) => {
+            d3.select("#exampleTweetsContainer")
+                .append("div")
+                .attr("class", `exampleTweets tweetsFor${tweet.tweet_id}`)
+                .attr("id", `et${tweet.tweet_id}${ind}`);
+            d3.select(`#et${tweet.tweet_id}${ind}`)
+                .append("blockquote")
+                .attr("id", `t${tweet.tweet_id}${ind}`)
+                .classed("twitter-tweet", true);
+            d3.select(`#t${tweet.tweet_id}${ind}`)
+                .append("a")
+                .attr("href", `${tweetPrefix}${example.tweet_id}`);
+        });
+    });
     twttr.widgets.load(
-        document.getElementById("tweetContainer")
+        document.getElementById("allTweetsContainer")
     );
+    twttr.widgets.load(
+        document.getElementById("exampleTweetsContainer")
+    );
+    currentTweetId = tweets[currentTweetIndex].tweet_id;
+    hideOrDisplayById(`st${currentTweetId}`, true);
+    d3.selectAll(`.tweetsFor${currentTweetId}`).style("display", "block");
+}
+function changeTweet(next) {
+    hideOrDisplayById(`st${currentTweetId}`, false);
+    d3.selectAll(`.tweetsFor${currentTweetId}`).style("display", "none");
+    currentTweetIndex = next ? currentTweetIndex + 1: currentTweetIndex - 1;
+    let tweetObj = tweets[currentTweetIndex];
+    currentTweetId = tweetObj.tweet_id;
+    hideOrDisplayById(`st${currentTweetId}`, true);
+    d3.selectAll(`.tweetsFor${currentTweetId}`).style("display", "block");
+    updateAmount(parseInt(tweetObj.int_amount));
+}
+function toggleExampleTweets() {
+    showExamples = showExamples ? false : true;
+    if (showExamples) {
+        hideOrDisplayById("exampleTweetsContainer", true);
+        d3.select("#showExampleButton").html("Hide");
+    } else {
+        hideOrDisplayById("exampleTweetsContainer", false);
+        d3.select("#showExampleButton").html("See This Amount in Other Tweets");
+    }
 }

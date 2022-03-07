@@ -111,14 +111,29 @@
         #sidebar {
             padding: 0 10px;
         }
-        #switchButton {
-        }
         #tweetComponent {
             min-width: 60%;
             padding: 0 20px;
         }
-        .twitter-tweet-rendered {
-            max-width: 500px !important;
+        #tweetContainer {
+            margin: auto;
+            width: 65%;
+            min-height: 90vh;
+        }
+        #exampleTweetsContainer {
+            height: 94vh;
+            position: absolute;
+            left: 100px;
+            bottom: 10px;
+            width: 40%;
+            background-color: white;
+            padding: 10px 20px;
+            border: 4px solid black;
+            border-radius: 5px;
+            overflow: scroll;
+        }
+        .singleTweet, .exampleTweets {
+            display: none;
         }
 
     </style>
@@ -128,11 +143,10 @@
             <div id="tweetComponent">
                 <div id="tweetContainer">
                     <button onclick="changeTweet(0)">Previous Tweet</button>
-                    <button onclick="changeTweet(1)">Next Tweet</button>
-                    <blockquote class="twitter-tweet">
-                        <a href="https://twitter.com/x/status/1487481943038074882"></a> 
-                    </blockquote>
+                    <button style="float: right;" onclick="changeTweet(1)">Next Tweet</button>
+                    <div id="allTweetsContainer"></div>
                 </div>
+                <button id="showExampleButton" onclick="toggleExampleTweets()">See This Amount in Other Tweets</button>
             </div>
             <div style="display: none;" id="vizContainer">
                 <div id="timeCompTooltip"></div>
@@ -145,7 +159,7 @@
                     <button id="switchButton" onclick="switchDisplayType()">Switch to <span id="switchButtonText">Visualization View</span></button>
                 </div>
                 <div id="inputContainer" class="sidebarSections">
-                    <div>Please enter your information</h4>
+                    <h4>Please enter your information</h4>
                     <div class="inputWrapper">
                         <label for="gender">Gender:</label>
                         <select name="gender" id="gender">
@@ -179,9 +193,16 @@
                         <label for="major">Major:</label>
                         <select name="major" id="major">
                             <option value=""></option>
-                            <option value="cs">Computer Science</option>
-                            <option value="medicine">Medicine</option>
-                            <option value="appliedPhysics">Applied Physics</option>
+                            <optgroup label="School of Engineering">
+                                <option value="cs">Computer Science</option>
+                            </optgroup>
+                            <optgroup label="School of Humanities & Sciences">
+                                <option value="appliedPhysics">Applied Physics</option>
+                                <option value="communication">Communication</option>
+                            </optgroup>
+                            <optgroup label="School of Medicine">
+                                <option value="medicine">Medicine (MD)</option>
+                            </optgroup>
                         </select>
                     </div>
                     <div class="inputWrapper">
@@ -208,7 +229,7 @@
                     <button onclick="updateAmount()">Find Analogy</button>-->
                 </div>
                 <div id="analogiesContainer" class="sidebarSections">
-                    <div style="margin-bottom: 5px">Best 5 Analogies for $<span id="analogyAmount"></span></div>
+                    <h3 style="margin: 5px 0px">Best 5 Analogies for $<span id="analogyAmount"></span></h3>
                     <div id="analogy0" class="analogySentenceContainer">
                         <div class="analogySentence"><span class="analogyTime analogyComponents">X</span> of <span class="monthlyCostAmount analogyComponents">M</span> for <span id="analogyPop0" class="analogyPop analogyComponents">Y</span></div>
                         <div class="analogySentenceOnetime"><span id="analogyPopOnetime0" class="analogyPopOnetime analogyComponents">Y</span> get <span class="analogyCostType analogyComponents">C</span></div>
@@ -252,6 +273,7 @@
                 </div>
             </div>
         </div>
+        <div style="display: none;" id="exampleTweetsContainer"></div>
         
         
     </body>
@@ -295,8 +317,10 @@
         let timeCompTooltip = d3.select("#timeCompTooltip");
         let analogyBank = [];
 
-        let tweets = {};
+        let tweets = [];
+        let currentTweetIndex = 0;
         let currentTweetId = 0;
+        let showExamples = false;
 
         d3.selectAll(".analogyPop")
             .on("mouseover", function () {
@@ -323,9 +347,9 @@
 
         let minPopulation, maxPopulation;
 
-        const margin = {top: 30, right: 70, bottom: 160, left: 80},
+        const margin = {top: 30, right: 70, bottom: 200, left: 80},
             width = 900 - margin.left - margin.right,
-            height = 680 - margin.top - margin.bottom;
+            height = 700 - margin.top - margin.bottom;
         const marginOnetime = {top: 30, right: 70, bottom: 160, left: 130},
             widthOnetime = 900 - marginOnetime.left - marginOnetime.right;
         const oneTimeSvg = d3.select("#oneTimeCostViz")
@@ -363,9 +387,8 @@
             maxPopulation = d3.max(allPopulationData.map(dat => dat.population));
             populationData.sort((a, b) => a.population - b.population);
 
-            for (let i = 0; i < data.tweets.length; i ++) {
-                tweets[i] = data.tweets[i];
-            }
+            tweets = data.tweets;
+            loadTweets();
             amount = parseInt(tweets[0].int_amount);
             // one-time cost chart
             onetimeData.sort((a, b) => a.cost - b.cost);

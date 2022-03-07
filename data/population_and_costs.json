@@ -10,13 +10,6 @@
         {
             "school": "medicine",
             "level": "grad",
-            "gender": "male",
-            "population": 590,
-            "population_text": "All Male Students in the School of Medicine"
-        },
-        {
-            "school": "medicine",
-            "level": "grad",
             "gender": "female",
             "population": 672,
             "population_text": "All Female Students in the School of Medicine"
@@ -27,13 +20,6 @@
             "gender": "all",
             "population": 592,
             "population_text": "All Students in the School of Law"
-        },
-        {
-            "school": "law",
-            "level": "grad",
-            "gender": "male",
-            "population": 305,
-            "population_text": "All Male Students in the School of Law"
         },
         {
             "school": "law",
@@ -52,13 +38,6 @@
         {
             "school": "gsb",
             "level": "grad",
-            "gender": "male",
-            "population": 509,
-            "population_text": "All Male Students in the Gradute School of Business"
-        },
-        {
-            "school": "gsb",
-            "level": "grad",
             "gender": "female",
             "population": 443,
             "population_text": "All Female Students in the Gradute School of Business"
@@ -69,13 +48,6 @@
             "gender": "all",
             "population": 277,
             "population_text": "All Students in the School of Education"
-        },
-        {
-            "school": "education",
-            "level": "grad",
-            "gender": "male",
-            "population": 99,
-            "population_text": "All Male Students in the School of Education"
         },
         {
             "school": "education",
@@ -94,13 +66,6 @@
         {
             "school": "engineering",
             "level": "all",
-            "gender": "male",
-            "population": 2831,
-            "population_text": "All Male Students in the School of Engineering"
-        },
-        {
-            "school": "engineering",
-            "level": "all",
             "gender": "female",
             "population": 1661,
             "population_text": "All Female Students in the School of Engineering"
@@ -111,13 +76,6 @@
             "gender": "all",
             "population": 3214,
             "population_text": "All Grad Students in the School of Engineering"
-        },
-        {
-            "school": "engineering",
-            "level": "grad",
-            "gender": "male",
-            "population": 2086,
-            "population_text": "All Male Grad Students in the School of Engineering"
         },
         {
             "school": "engineering",
@@ -136,13 +94,6 @@
         {
             "school": "engineering",
             "level": "undergrad",
-            "gender": "male",
-            "population": 533,
-            "population_text": "All Male Undergrad Students in the School of Engineering"
-        },
-        {
-            "school": "engineering",
-            "level": "undergrad",
             "gender": "female",
             "population": 745,
             "population_text": "All Female Undergrad Students in the School of Engineering"
@@ -153,13 +104,6 @@
             "gender": "all",
             "population": 508,
             "population_text": "All Students in the School of EEES"
-        },
-        {
-            "school": "earth",
-            "level": "all",
-            "gender": "male",
-            "population": 237,
-            "population_text": "All Male Students in the School of EEES"
         },
         {
             "school": "earth",
@@ -178,13 +122,6 @@
         {
             "school": "earth",
             "level": "grad",
-            "gender": "male",
-            "population": 206,
-            "population_text": "All Male Grad Students in the School of EEES"
-        },
-        {
-            "school": "earth",
-            "level": "grad",
             "gender": "female",
             "population": 206,
             "population_text": "All Female Grad Students in the School of EEES"
@@ -195,13 +132,6 @@
             "gender": "all",
             "population": 93,
             "population_text": "All Undergrad Students in the School of EEES"
-        },
-        {
-            "school": "earth",
-            "level": "undergrad",
-            "gender": "male",
-            "population": 31,
-            "population_text": "All Male Undergrad Students in the School of EEES"
         },
         {
             "school": "earth",
@@ -220,13 +150,6 @@
         {
             "school": "humanities&sciences",
             "level": "all",
-            "gender": "male",
-            "population": 2105,
-            "population_text": "All Male Students in the School of Humanities & Sciences"
-        },
-        {
-            "school": "humanities&sciences",
-            "level": "all",
             "gender": "female",
             "population": 2070,
             "population_text": "All Female Students in the School of Humanities & Sciences"
@@ -237,13 +160,6 @@
             "gender": "all",
             "population": 2307,
             "population_text": "All Grad Students in the School of Humanities & Sciences"
-        },
-        {
-            "school": "humanities&sciences",
-            "level": "grad",
-            "gender": "male",
-            "population": 1297,
-            "population_text": "All Male Grad Students in the School of Humanities & Sciences"
         },
         {
             "school": "humanities&sciences",
@@ -262,13 +178,6 @@
         {
             "school": "humanities&sciences",
             "level": "undergrad",
-            "gender": "male",
-            "population": 808,
-            "population_text": "All Male Undergrad Students in the School of Humanities & Sciences"
-        },
-        {
-            "school": "humanities&sciences",
-            "level": "undergrad",
             "gender": "female",
             "population": 1060,
             "population_text": "All Female Undergrad Students in the School of Humanities & Sciences"
@@ -283,13 +192,6 @@
         {
             "school": "all",
             "level": "undergrad",
-            "gender": "male",
-            "population": 3124,
-            "population_text": "All Stanford Male Undergrad Students"
-        },
-        {
-            "school": "all",
-            "level": "undergrad",
             "gender": "female",
             "population": 3242,
             "population_text": "All Stanford Female Undergrad Students"
@@ -300,13 +202,6 @@
             "gender": "all",
             "population": 7374,
             "population_text": "All Stanford Grad Students"
-        },
-        {
-            "school": "all",
-            "level": "grad",
-            "gender": "male",
-            "population": 4107,
-            "population_text": "All Stanford Male Grad Students"
         },
         {
             "school": "all",
@@ -341,6 +236,10 @@
         {
             "population": 39538223,
             "population_text": "The State of California Population"
+        },
+        {
+            "population": 329500000,
+            "population_text": "The U.S. Population"
         }
     ],
     "majors": {
@@ -353,14 +252,6 @@
                     "major": "cs",
                     "population": 1345,
                     "population_text": "All Computer Science Students"
-                },
-                {
-                    "school": "engineering",
-                    "level": "all",
-                    "gender": "male",
-                    "major": "cs",
-                    "population": 911,
-                    "population_text": "All Male Computer Science Students"
                 },
                 {
                     "school": "engineering",
@@ -381,14 +272,6 @@
                 {
                     "school": "engineering",
                     "level": "grad",
-                    "gender": "male",
-                    "major": "cs",
-                    "population": 504,
-                    "population_text": "All Male Computer Science Grad Students"
-                },
-                {
-                    "school": "engineering",
-                    "level": "grad",
                     "gender": "female",
                     "major": "cs",
                     "population": 219,
@@ -401,14 +284,6 @@
                     "major": "cs",
                     "population": 622,
                     "population_text": "All Computer Science Undergrad Students"
-                },
-                {
-                    "school": "engineering",
-                    "level": "undergrad",
-                    "gender": "male",
-                    "major": "cs",
-                    "population": 407,
-                    "population_text": "All Male Computer Science Undergrad Students"
                 },
                 {
                     "school": "engineering",
@@ -434,14 +309,6 @@
                     "school": "medicine",
                     "level": "grad",
                     "major": "medicine",
-                    "gender": "male",
-                    "population": 248,
-                    "population_text": "All Male MD Students"
-                },
-                {
-                    "school": "medicine",
-                    "level": "grad",
-                    "major": "medicine",
                     "gender": "female",
                     "population": 240,
                     "population_text": "All Female MD Students"
@@ -462,17 +329,59 @@
                     "school": "humanities&sciences",
                     "level": "grad",
                     "major": "appliedPhysics",
-                    "gender": "male",
-                    "population": 104,
-                    "population_text": "All Male Applied Physics Students"
+                    "gender": "female",
+                    "population": 49,
+                    "population_text": "All Female Applied Physics Students"
+                }
+            ],
+            "communication": [
+                {
+                    "school": "humanities&sciences",
+                    "level": "all",
+                    "major": "communication",
+                    "gender": "all",
+                    "population": 98,
+                    "population_text": "All Communication Students"
+                },
+                {
+                    "school": "humanities&sciences",
+                    "level": "all",
+                    "major": "communication",
+                    "gender": "female",
+                    "population": 60,
+                    "population_text": "All Female Communication Students"
+                },
+                {
+                    "school": "humanities&sciences",
+                    "level": "undergrad",
+                    "major": "communication",
+                    "gender": "all",
+                    "population": 43,
+                    "population_text": "All Communication Undergrad Students"
+                },
+                {
+                    "school": "humanities&sciences",
+                    "level": "undergrad",
+                    "major": "communication",
+                    "gender": "female",
+                    "population": 27,
+                    "population_text": "All Female Communication Undergrad Students"
                 },
                 {
                     "school": "humanities&sciences",
                     "level": "grad",
-                    "major": "appliedPhysics",
+                    "major": "communication",
+                    "gender": "all",
+                    "population": 55,
+                    "population_text": "All Communication Grad Students"
+                },
+                {
+                    "school": "humanities&sciences",
+                    "level": "grad",
+                    "major": "communication",
                     "gender": "female",
-                    "population": 49,
-                    "population_text": "All Female Applied Physics Students"
+                    "population": 33,
+                    "population_text": "All Female Communication Grad Students"
                 }
             ]
         }
@@ -601,11 +510,25 @@
             "cost": 221892
         },
         {
-            "type": "fees",
+            "type": "school",
             "school": "all",
             "level": "all",
             "name": "a year of Cardinal Care",
             "cost": 6192
+        },
+        {
+            "type": "school",
+            "school": "all",
+            "level": "grad",
+            "name": "a Fellowship",
+            "cost": 100000
+        },
+        {
+            "type": "school",
+            "school": "all",
+            "level": "grad",
+            "name": "a Research Grant",
+            "cost": 500000
         },
         {
             "type": "transportation",
@@ -669,135 +592,193 @@
         },
         {
             "type": "property",
-            "name": "a 2-Bedroom Condo in South Florida",
-            "cost": 100000
+            "name": "an Average House in the Bay Area",
+            "cost": 1300000
         },
         {
             "type": "property",
-            "name": "an Average House in the Bay Area",
-            "cost": 1300000
+            "name": "an Average House in the U.S.",
+            "cost": 374900
         }
     ],
     "tweets": [
         {
-            "tweet_id": "1487481943038074882",
-            "currency_amount": "$1,800,000.00",
-            "int_amount": "1800000",
-            "text": "POC-Founded Fintech Raises $1.8 Million In VC To Help The Food Truck Industry https://trib.al/jX3NqFg"
+            "tweet_id": "1486509283474821133",
+            "currency_amount": "$1,000,000.00",
+            "int_amount": "1000000",
+            "text": "Box Office: \u2018Spider-Man\u2019 Dips Below $1 Million As \u2018Venom 2\u2019 Tops \u2018Venom\u2019 https://t.co/PZhGL8TFGE https://t.co/RPQrADAKX2",
+            "other_tweets": [
+                {
+                    "tweet_id": "1486426044781453320",
+                    "currency_amount": "$1,000,000.00",
+                    "int_amount": "1000000",
+                    "text": "1/ NEW from me: \ud83e\ude99 How McDonald's lame joke about a Grimace cryptocurrency sparked what could be $1 million+ in fradulent meme coins. "
+                }
+            ]
         },
         {
-            "tweet_id": "703208134538502146",
+            "tweet_id": "1376985854229504007",
             "currency_amount": "$10,000,000.00",
             "int_amount": "10000000",
-            "text": "This $10 million supercomputer promises higher returns for Wall Street: http://bloom.bg/1R6WbAw"
-        },
-        {
-            "tweet_id": "1487534785639718915",
-            "currency_amount": "$14,750,000.00",
-            "int_amount": "14750000",
-            "text": "$14.75-Million Waterfront Villa On The Bahamas\u2019 Paradise Island Epitomizes Tropical Living https://trib.al/gTZPCMS"
-        },
-        {
-            "tweet_id": "601469925899804672",
-            "currency_amount": "$67,000,000.00",
-            "int_amount": "67000000",
-            "text": "Apartments at $67 Million set to test Hong Kong luxury market:"
+            "text": "This is a story about how I lost $10,000,000 by doing something stupid.",
+            "other_tweets": [
+                {
+                    "tweet_id": "703208134538502146",
+                    "currency_amount": "$10,000,000.00",
+                    "int_amount": "10000000",
+                    "text": "This $10 million supercomputer promises higher returns for Wall Street: http://bloom.bg/1R6WbAw"
+                }
+            ]
         },
         {
             "tweet_id": "1301526620847697922",
             "currency_amount": "$100,000,000.00",
             "int_amount": "100000000",
-            "text": "The $100 million gift to historically Black medical schools will ease the debt burden of their students. More Black doctors will mean more Black lives saved in America."
+            "text": "The $100 million gift to historically Black medical schools will ease the debt burden of their students. More Black doctors will mean more Black lives saved in America.",
+            "other_tweets": [
+                {
+                    "tweet_id": "1352392678177034242",
+                    "currency_amount": "$100,000,000.00",
+                    "int_amount": "100000000",
+                    "text": "Am donating $100M towards a prize for best carbon capture technology"
+                },
+                {
+                    "tweet_id": "956247084855898112",
+                    "currency_amount": "$100,000,000.00",
+                    "int_amount": "100000000",
+                    "text": "FX traders do $100 million deals on mobile as market transforms: https://bloom.bg/2BsJ7F6"
+                }
+            ]
         },
         {
-            "tweet_id": "956247084855898112",
-            "currency_amount": "$100,000,000.00",
-            "int_amount": "100000000",
-            "text": "FX traders do $100 million deals on mobile as market transforms: https://bloom.bg/2BsJ7F6"
-        },
-        {
-            "tweet_id": "1458116176165412867",
+            "tweet_id": "1486551560494718982",
             "currency_amount": "$1,000,000,000.00",
             "int_amount": "1000000000",
-            "text": "Element Capital hit with $1bn loss in bond market shake-up"
+            "text": "The company with an estimated $1 billion contract to make Covid-19 vaccines for the European Commission was best known until recently as a leader in the field of animal genetics https://trib.al/iO9qPMK",
+            "other_tweets": [
+                {
+                    "tweet_id": "1487980210104455168",
+                    "currency_amount": "$1,000,000,000.00",
+                    "int_amount": "1000000000",
+                    "text": "Google To Invest Up To $1 Billion In Indian Billionaire Sunil Mittal\u2019s Bharti Airtel https://t.co/FwoAGm0RRt https://t.co/RAuHqwuOyq"
+                },
+                {
+                    "tweet_id": "633645090909646848",
+                    "currency_amount": "$1,000,000,000.00",
+                    "int_amount": "1000000000",
+                    "text": "RT @BloombergNEF: .@SunEdison and @GoldmanSachs agree to form $1 billion clean power fund http://t.co/E1hPh3g2GX http://t.co/Yj6r0HJYE2"
+                },
+                {
+                    "tweet_id": "1458116176165412867",
+                    "currency_amount": "$1,000,000,000.00",
+                    "int_amount": "1000000000",
+                    "text": "Element Capital hit with $1bn loss in bond market shake-up"
+                }
+            ]
+        },
+        {
+            "tweet_id": "1486008033205440517",
+            "currency_amount": "$30,000,000,000.00",
+            "int_amount": "30000000000",
+            "text": "Atlas Health raises $40 million to help hospitals better connect their patients with $30 billion in yearly philanthropic medical financial aid \ud83e\ude7a\ud83d\udcb0 \u2b07\ufe0f",
+            "other_tweets": [
+                {
+                    "tweet_id": "1133742309944778752",
+                    "currency_amount": "$30,500,000,000.00",
+                    "int_amount": "30500000000",
+                    "text": "Total spending on financial market data, analysis and news rose 7% to a record $30.5 billion in 2018 - the fastest growth since 2008. https://bloom.bg/2wuTI1S"
+                }]
+        },
+        {
+            "tweet_id": "1487481943038074882",
+            "currency_amount": "$1,800,000.00",
+            "int_amount": "1800000",
+            "text": "POC-Founded Fintech Raises $1.8 Million In VC To Help The Food Truck Industry https://trib.al/jX3NqFg",
+            "other_tweets": []
+        },
+        {
+            "tweet_id": "1487534785639718915",
+            "currency_amount": "$14,750,000.00",
+            "int_amount": "14750000",
+            "text": "$14.75-Million Waterfront Villa On The Bahamas\u2019 Paradise Island Epitomizes Tropical Living https://trib.al/gTZPCMS",
+            "other_tweets": []
+        },
+        {
+            "tweet_id": "601469925899804672",
+            "currency_amount": "$67,000,000.00",
+            "int_amount": "67000000",
+            "text": "Apartments at $67 Million set to test Hong Kong luxury market:",
+            "other_tweets": []
         },
         {
             "tweet_id": "957059909228617730",
             "currency_amount": "$1,700,000,000.00",
             "int_amount": "1700000000",
-            "text": "Wall Street has a $1.7 billion bet on the rising risk of grid attacks: https://bloom.bg/2EbWr3q"
+            "text": "Wall Street has a $1.7 billion bet on the rising risk of grid attacks: https://bloom.bg/2EbWr3q",
+            "other_tweets": []
         },
         {
             "tweet_id": "899904006624952320",
-            "currency_amount": "$187,000,000,000.00",
-            "int_amount": "187000000000",
-            "text": "Eliminating gender gaps at work could add 150 billion pounds ($187 billion) to U.K.\u2019s annual GDP by 2025."
+            "currency_amount": "$1,870,000,000.00",
+            "int_amount": "1870000000",
+            "text": "Eliminating gender gaps at work could add 150 billion pounds ($187 billion) to U.K.\u2019s annual GDP by 2025.",
+            "other_tweets": []
         },
         {
             "tweet_id": "1458389630059941889",
             "currency_amount": "$3,215,892,000.00",
             "int_amount": "3215892000",
-            "text": "Google loses appeal against \u20ac2.4bn shopping fine"
+            "text": "Google loses appeal against \u20ac2.4bn shopping fine",
+            "other_tweets": []
         },
         {
             "tweet_id": "1145678471429001217",
             "currency_amount": "$16,400,000,000.00",
             "int_amount": "16400000000",
-            "text": "Sales of debt globally for sustainability projects have more than doubled this year to $16.4 billion, and Korea makes up about 16% of that total. https://bloom.bg/2RMPufU"
+            "text": "Sales of debt globally for sustainability projects have more than doubled this year to $16.4 billion, and Korea makes up about 16% of that total. https://bloom.bg/2RMPufU",
+            "other_tweets": []
         },
         {
             "tweet_id": "1341431746907283460",
             "currency_amount": "$27,000,000,000.00",
             "int_amount": "27000000000",
-            "text": "In 2020, we've seen a record $27B flow into ESG-related equity ETFs in the US, but it can be difficult to discern a quality sustainable investment from a greenwashed one. This research seeks to bring clarity and discipline to the discussion."
-        },
-        {
-            "tweet_id": "1133742309944778752",
-            "currency_amount": "$30,500,000,000.00",
-            "int_amount": "30500000000",
-            "text": "Total spending on financial market data, analysis and news rose 7% to a record $30.5 billion in 2018 - the fastest growth since 2008. https://bloom.bg/2wuTI1S"
+            "text": "In 2020, we've seen a record $27B flow into ESG-related equity ETFs in the US, but it can be difficult to discern a quality sustainable investment from a greenwashed one. This research seeks to bring clarity and discipline to the discussion.",
+            "other_tweets": []
         },
         {
             "tweet_id": "1447919863255773184",
             "currency_amount": "$32,158,920,000.00",
             "int_amount": "32158920000",
-            "text": "Black, Asian, and other ethnic groups across the labor market are estimated to bring \u00a324 billion in annual economic benefits to the UK economy. While we've seen progress, there's still work to be done to bridge the Black wealth gap. Learn more: https://bloom.bg/3oUw1MZ"
+            "text": "Black, Asian, and other ethnic groups across the labor market are estimated to bring \u00a324 billion in annual economic benefits to the UK economy. While we've seen progress, there's still work to be done to bridge the Black wealth gap. Learn more: https://bloom.bg/3oUw1MZ",
+            "other_tweets": []
         },
         {
             "tweet_id": "979138614645927936",
             "currency_amount": "$63,700,000,000.00",
             "int_amount": "63700000000",
-            "text": "Global art sales reached $63.7 billion in 2017, with China as the second largest marketplace following the U.S. at 21%."
+            "text": "Global art sales reached $63.7 billion in 2017, with China as the second largest marketplace following the U.S. at 21%.",
+            "other_tweets": []
         },
         {
             "tweet_id": "801426701439758336",
             "currency_amount": "$100,000,000,000.00",
             "int_amount": "100000000000",
-            "text": "$100 Billion Chinese-made city near Singapore \u2018scares everybody\u2019: http://bloom.bg/2g3dzvV"
+            "text": "$100 Billion Chinese-made city near Singapore \u2018scares everybody\u2019: http://bloom.bg/2g3dzvV",
+            "other_tweets": []
         },
         {
             "tweet_id": "1236335805544779779",
             "currency_amount": "$282,200,000,000.00",
             "int_amount": "282200000000",
-            "text": "Global money flowing into the renewable energy industry totaled $282.2 billion last year, up 1% from 2018"
+            "text": "Global money flowing into the renewable energy industry totaled $282.2 billion last year, up 1% from 2018",
+            "other_tweets": []
         },
         {
             "tweet_id": "1366770302471073801",
             "currency_amount": "$732,000,000,000.00",
             "int_amount": "732000000000",
-            "text": "Despite the pandemic, sustainable debt hit another record in 2020, with $732 billion issued."
-        },
-        {
-            "tweet_id": "889477021021097984",
-            "currency_amount": "$23,000,000,000,000.00",
-            "int_amount": "23000000000000",
-            "text": "Global sustainable investments grew by a quarter to $23 trillion over the last two years: https://bloom.bg/2ttQwRe"
-        },
-        {
-            "tweet_id": "1364259677442363398",
-            "currency_amount": "$140,500,000,000,000.00",
-            "int_amount": "140500000000000",
-            "text": "This represents more than a third of the $140.5 trillion in projected total assets under management."
+            "text": "Despite the pandemic, sustainable debt hit another record in 2020, with $732 billion issued.",
+            "other_tweets": []
         }
     ]
 }
