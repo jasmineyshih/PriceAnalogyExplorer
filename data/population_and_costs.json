@@ -5,28 +5,28 @@
             "level": "grad",
             "gender": "all",
             "population": 1262,
-            "population_text": "All Students in the School of Medicine"
+            "population_text": "All Students in School of Medicine"
         },
         {
             "school": "medicine",
             "level": "grad",
             "gender": "female",
             "population": 672,
-            "population_text": "All Female Students in the School of Medicine"
+            "population_text": "All Female Students in School of Medicine"
         },
         {
             "school": "law",
             "level": "grad",
             "gender": "all",
             "population": 592,
-            "population_text": "All Students in the School of Law"
+            "population_text": "All Students in School of Law"
         },
         {
             "school": "law",
             "level": "grad",
             "gender": "female",
             "population": 287,
-            "population_text": "All Female Students in the School of Law"
+            "population_text": "All Female Students in School of Law"
         },
         {
             "school": "gsb",
@@ -47,140 +47,140 @@
             "level": "grad",
             "gender": "all",
             "population": 277,
-            "population_text": "All Students in the School of Education"
+            "population_text": "All Students in School of Education"
         },
         {
             "school": "education",
             "level": "grad",
             "gender": "female",
             "population": 178,
-            "population_text": "All Female Students in the School of Education"
+            "population_text": "All Female Students in School of Education"
         },
         {
             "school": "engineering",
             "level": "all",
             "gender": "all",
             "population": 4492,
-            "population_text": "All Students in the School of Engineering"
+            "population_text": "All Students in School of Engineering"
         },
         {
             "school": "engineering",
             "level": "all",
             "gender": "female",
             "population": 1661,
-            "population_text": "All Female Students in the School of Engineering"
+            "population_text": "All Female Students in School of Engineering"
         },
         {
             "school": "engineering",
             "level": "grad",
             "gender": "all",
             "population": 3214,
-            "population_text": "All Grad Students in the School of Engineering"
+            "population_text": "All Grad Students in School of Engineering"
         },
         {
             "school": "engineering",
             "level": "grad",
             "gender": "female",
             "population": 1128,
-            "population_text": "All Female Grad Students in the School of Engineering"
+            "population_text": "All Female Grad Students in School of Engineering"
         },
         {
             "school": "engineering",
             "level": "undergrad",
             "gender": "all",
             "population": 1278,
-            "population_text": "All Undergrad Students in the School of Engineering"
+            "population_text": "All Undergrad Students in School of Engineering"
         },
         {
             "school": "engineering",
             "level": "undergrad",
             "gender": "female",
             "population": 745,
-            "population_text": "All Female Undergrad Students in the School of Engineering"
+            "population_text": "All Female Undergrad Students in School of Engineering"
         },
         {
             "school": "earth",
             "level": "all",
             "gender": "all",
             "population": 508,
-            "population_text": "All Students in the School of EEES"
+            "population_text": "All Students in School of EEES"
         },
         {
             "school": "earth",
             "level": "all",
             "gender": "female",
             "population": 271,
-            "population_text": "All Female Students in the School of EEES"
+            "population_text": "All Female Students in School of EEES"
         },
         {
             "school": "earth",
             "level": "grad",
             "gender": "all",
             "population": 415,
-            "population_text": "All Grad Students in the School of EEES"
+            "population_text": "All Grad Students in School of EEES"
         },
         {
             "school": "earth",
             "level": "grad",
             "gender": "female",
             "population": 206,
-            "population_text": "All Female Grad Students in the School of EEES"
+            "population_text": "All Female Grad Students in School of EEES"
         },
         {
             "school": "earth",
             "level": "undergrad",
             "gender": "all",
             "population": 93,
-            "population_text": "All Undergrad Students in the School of EEES"
+            "population_text": "All Undergrad Students in School of EEES"
         },
         {
             "school": "earth",
             "level": "undergrad",
             "gender": "female",
             "population": 62,
-            "population_text": "All Female Undergrad Students in the School of EEES"
+            "population_text": "All Female Undergrad Students in School of EEES"
         },
         {
             "school": "humanities&sciences",
             "level": "all",
             "gender": "all",
             "population": 4175,
-            "population_text": "All Students in the School of Humanities & Sciences"
+            "population_text": "All Students in School of H & S"
         },
         {
             "school": "humanities&sciences",
             "level": "all",
             "gender": "female",
             "population": 2070,
-            "population_text": "All Female Students in the School of Humanities & Sciences"
+            "population_text": "All Female Students in School of H & S"
         },
         {
             "school": "humanities&sciences",
             "level": "grad",
             "gender": "all",
             "population": 2307,
-            "population_text": "All Grad Students in the School of Humanities & Sciences"
+            "population_text": "All Grad Students in School of H & S"
         },
         {
             "school": "humanities&sciences",
             "level": "grad",
             "gender": "female",
             "population": 1010,
-            "population_text": "All Female Grad Students in the School of Humanities & Sciences"
+            "population_text": "All Female Grad Students in School of H & S"
         },
         {
             "school": "humanities&sciences",
             "level": "undergrad",
             "gender": "all",
             "population": 1868,
-            "population_text": "All Undergrad Students in the School of Humanities & Sciences"
+            "population_text": "All Undergrad Students in School of H & S"
         },
         {
             "school": "humanities&sciences",
             "level": "undergrad",
             "gender": "female",
             "population": 1060,
-            "population_text": "All Female Undergrad Students in the School of Humanities & Sciences"
+            "population_text": "All Female Undergrad Students in School of H & S"
         },
         {
             "school": "all",
@@ -303,7 +303,7 @@
                     "major": "medicine",
                     "gender": "all",
                     "population": 488,
-                    "population_text": "All MD Students in the School of Medicine"
+                    "population_text": "All MD Students in School of Medicine"
                 },
                 {
                     "school": "medicine",

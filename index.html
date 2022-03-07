@@ -383,7 +383,7 @@
             });
             majorsData = data.majors;
             onetimeData = data.onetime;
-            minPopulation = d3.min(allPopulationData.map(dat => dat.population));
+            minPopulation = 33;//d3.min(allPopulationData.map(dat => dat.population));
             maxPopulation = d3.max(allPopulationData.map(dat => dat.population));
             populationData.sort((a, b) => a.population - b.population);
 

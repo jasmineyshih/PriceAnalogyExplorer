@@ -476,6 +476,12 @@ function findClosestAnalogy () {
                                 removedDup = true;
                                 break;
                         }
+                    } else if (analogyBank[i].analogyType == analogyBank[j].analogyType && analogyBank[j].analogyType == "onetime") {
+                        if (analogyBank[i].population_text == analogyBank[j].population_text) {
+                                analogyBank.splice(j, 1);   // remove the later one
+                                removedDup = true;
+                                break;
+                        }
                     }
                 }
             }
