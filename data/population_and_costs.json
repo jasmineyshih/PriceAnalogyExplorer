@@ -651,6 +651,19 @@
             ]
         },
         {
+            "tweet_id": "1486008033205440517",
+            "currency_amount": "$30,000,000,000.00",
+            "int_amount": "30000000000",
+            "text": "Atlas Health raises $40 million to help hospitals better connect their patients with $30 billion in yearly philanthropic medical financial aid \ud83e\ude7a\ud83d\udcb0 \u2b07\ufe0f",
+            "other_tweets": [
+                {
+                    "tweet_id": "1133742309944778752",
+                    "currency_amount": "$30,500,000,000.00",
+                    "int_amount": "30500000000",
+                    "text": "Total spending on financial market data, analysis and news rose 7% to a record $30.5 billion in 2018 - the fastest growth since 2008. https://bloom.bg/2wuTI1S"
+                }]
+        },
+        {
             "tweet_id": "1486551560494718982",
             "currency_amount": "$1,000,000,000.00",
             "int_amount": "1000000000",
@@ -675,19 +688,6 @@
                     "text": "Element Capital hit with $1bn loss in bond market shake-up"
                 }
             ]
-        },
-        {
-            "tweet_id": "1486008033205440517",
-            "currency_amount": "$30,000,000,000.00",
-            "int_amount": "30000000000",
-            "text": "Atlas Health raises $40 million to help hospitals better connect their patients with $30 billion in yearly philanthropic medical financial aid \ud83e\ude7a\ud83d\udcb0 \u2b07\ufe0f",
-            "other_tweets": [
-                {
-                    "tweet_id": "1133742309944778752",
-                    "currency_amount": "$30,500,000,000.00",
-                    "int_amount": "30500000000",
-                    "text": "Total spending on financial market data, analysis and news rose 7% to a record $30.5 billion in 2018 - the fastest growth since 2008. https://bloom.bg/2wuTI1S"
-                }]
         },
         {
             "tweet_id": "1487481943038074882",
